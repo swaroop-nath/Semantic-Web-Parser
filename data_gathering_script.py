@@ -7,22 +7,9 @@ from pandas import DataFrame, ExcelWriter
 url = 'https://stackoverflow.com/questions/13336576/extracting-an-information-from-web-page-by-machine-learning'
 
 accepted_content_classifiers = ['content', 'primary', 'body', 'main']
-tag_h1 = []
-tag_h2 = []
-tag_h3 = []
-tag_h4 = []
-tag_h5 = []
-tag_h6= []
+tag_h= []
 tag_p = []
-tag_b = []
-tag_i = []
-tag_u = []
-tag_em = []
-tag_small = []
-tag_strike = []
-tag_li = []
-tag_ol = []
-tag_ul = []
+tag_formatting = []
 tag_table = []  #Boolean Value - Possible values: 'Yes' and 'No'
 word_count = []
 children_ratio = []  #This ratio signifies the sparsity of children tags in the content of an element
@@ -52,22 +39,9 @@ def findRelevanceExtent(id_class_role):
 def featureExtraction(soup):
     divs = soup.find_all('div')
     for div in divs:
-        tag_h1.append(len(div.find_all('h1')))
-        tag_h2.append(len(div.find_all('h2')))
-        tag_h3.append(len(div.find_all('h3')))
-        tag_h4.append(len(div.find_all('h4')))
-        tag_h5.append(len(div.find_all('h5')))
-        tag_h6.append(len(div.find_all('h6')))
+        tag_h.append(len(div.find_all('h1')) + len(div.find_all('h2')) + len(div.find_all('h3')) + len(div.find_all('h4')) + len(div.find_all('h5')) + len(div.find_all('h6')))
         tag_p.append(len(div.find_all('p')))
-        tag_b.append(len(div.find_all('b')))
-        tag_i.append(len(div.find_all('i')))
-        tag_u.append(len(div.find_all('u')))
-        tag_em.append(len(div.find_all('em')))
-        tag_small.append(len(div.find_all('small')))
-        tag_strike.append(len(div.find_all('strike')))
-        tag_li.append(len(div.find_all('li')))
-        tag_ul.append(len(div.find_all('ul')))
-        tag_ol.append(len(div.find_all('ol')))
+        tag_formatting.append(len(div.find_all('b')) + len(div.find_all('i')) + len(div.find_all('u')) + len(div.find_all('em')) + len(div.find_all('small')) + len(div.find_all('strike')) + len(div.find_all('li')) + len(div.find_all('ul')) + len(div.find_all('ol')))
         if len(div.find_all('table')) > 0: tag_table.append('YES')
         else: tag_table.append('NO')
         text_content = div.text.strip()
@@ -87,8 +61,8 @@ def featureExtraction(soup):
 
         
 def formCSVData():
-    data = {'tag_h1': tag_h1,'tag_h2': tag_h2,'tag_h3': tag_h3,'tag_h4': tag_h4,'tag_h5': tag_h5,'tag_h6': tag_h6,'tag_p': tag_p,'tag_b': tag_b,'tag_i': tag_i,'tag_u': tag_u,'tag_em': tag_em,'tag_small': tag_small,'tag_strike': tag_strike,'tag_li': tag_li,'tag_ol': tag_ol,'tag_ul': tag_ul,'tag_table': tag_table,'word_count': word_count,'children_ratio': children_ratio,'id_relevance_extent': id_relevance_extent,'tag_main': tag_main,'tag_article': tag_article}
-    col_names = ['tag_h1', 'tag_h2', 'tag_h3', 'tag_h4', 'tag_h5', 'tag_h6', 'tag_p', 'tag_b', 'tag_i', 'tag_u', 'tag_em', 'tag_small', 'tag_strike', 'tag_li', 'tag_ol', 'tag_ul', 'tag_table', 'word_count', 'children_ratio', 'id_relevance_extent', 'tag_main', 'tag_article']
+    data = {'tag_h': tag_h,'tag_p': tag_p,'tag_formatting': tag_formatting,'tag_table': tag_table,'word_count': word_count,'children_ratio': children_ratio,'id_relevance_extent': id_relevance_extent,'tag_main': tag_main,'tag_article': tag_article}
+    # col_names = ['tag_h1', 'tag_h2', 'tag_h3', 'tag_h4', 'tag_h5', 'tag_h6', 'tag_p', 'tag_b', 'tag_i', 'tag_u', 'tag_em', 'tag_small', 'tag_strike', 'tag_li', 'tag_ol', 'tag_ul', 'tag_table', 'word_count', 'children_ratio', 'id_relevance_extent', 'tag_main', 'tag_article']
     df = DataFrame(data)
     writer = ExcelWriter('data_gathered.xlsx', engine = 'xlsxwriter')
     df.to_excel(writer, sheet_name = 'Sheet1')
