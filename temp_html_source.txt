@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html class="html__responsive" itemscope="" itemtype="http://schema.org/QAPage">
+<head>
+<title>python - urllib: Opening a url always gets 429: Too many requests - Stack Overflow</title>
+<link href="https://cdn.sstatic.net/Sites/stackoverflow/img/favicon.ico?v=4f32ecc8f43d" rel="shortcut icon"/>
+<link href="https://cdn.sstatic.net/Sites/stackoverflow/img/apple-touch-icon.png?v=c78bd457575a" rel="apple-touch-icon image_src"/>
+<link href="/opensearch.xml" rel="search" title="Stack Overflow" type="application/opensearchdescription+xml"/>
+<meta content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0" name="viewport"/>
+<meta content="website" property="og:type"/>
+<meta content="https://stackoverflow.com/questions/54728650/urllib-opening-a-url-always-gets-429-too-many-requests" property="og:url"/>
+<meta content="Stack Overflow" property="og:site_name"/>
+<meta content="https://cdn.sstatic.net/Sites/stackoverflow/img/apple-touch-icon@2.png?v=73d79a89bded" itemprop="image primaryImageOfPage" property="og:image"/>
+<meta content="summary" name="twitter:card"/>
+<meta content="stackoverflow.com" name="twitter:domain"/>
+<meta content="urllib: Opening a url always gets 429: Too many requests" itemprop="name" name="twitter:title" property="og:title"/>
+<meta content="I just got started with the urllib module. I'm trying to scrape products from supermarkets and there's a website that seems to always respond with an HTTP Error 429: Too many requests. I already di..." itemprop="description" name="twitter:description" property="og:description"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://cdn.sstatic.net/Js/stub.en.js?v=fe4194e3bbfa"></script>
+<link href="https://cdn.sstatic.net/Shared/stacks.css?v=6a897dbbc53b" rel="stylesheet" type="text/css"/>
+<link href="https://cdn.sstatic.net/Sites/stackoverflow/primary.css?v=3029a1bfa102" rel="stylesheet" type="text/css"/>
+<link href="/feeds/question/54728650" rel="alternate" title="Feed for question 'urllib: Opening a url always gets 429: Too many requests'" type="application/atom+xml"/>
+<meta content="US" name="twitter:app:country"/>
+<meta content="Stack Exchange iOS" name="twitter:app:name:iphone"/>
+<meta content="871299723" name="twitter:app:id:iphone"/>
+<meta content="se-zaphod://stackoverflow.com/questions/54728650/urllib-opening-a-url-always-gets-429-too-many-requests" name="twitter:app:url:iphone"/>
+<meta content="Stack Exchange iOS" name="twitter:app:name:ipad"/>
+<meta content="871299723" name="twitter:app:id:ipad"/>
+<meta content="se-zaphod://stackoverflow.com/questions/54728650/urllib-opening-a-url-always-gets-429-too-many-requests" name="twitter:app:url:ipad"/>
+<meta content="Stack Exchange Android" name="twitter:app:name:googleplay"/>
+<meta content="http://stackoverflow.com/questions/54728650/urllib-opening-a-url-always-gets-429-too-many-requests" name="twitter:app:url:googleplay"/>
+<meta content="com.stackexchange.marvin" name="twitter:app:id:googleplay"/>
+<script>
+
+            StackExchange.ready(function () {
+                                    
+                    StackExchange.using("snippets", function () {
+                        StackExchange.snippets.initSnippetRenderer();
+                    });
+                    
+
+                StackExchange.using("postValidation", function () {
+                    StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+                });
+
+                
+                StackExchange.question.init({showAnswerHelp:true,totalCommentCount:2,shownCommentCount:2,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:54728650});
+
+                styleCode();
+
+                    StackExchange.realtime.subscribeToQuestion('1', '54728650');
+                                                    StackExchange.using("gps", function () { StackExchange.gps.trackOutboundClicks('#content', '.post-text'); });
+
+            });
+        </script>
+<script>
+        StackExchange.init({"locale":"en","serverTime":1558691417,"routeName":"Questions/Show","stackAuthUrl":"https://stackauth.com","networkMetaHostname":"meta.stackexchange.com","site":{"name":"Stack Overflow","description":"Q&A for professional and enthusiast programmers","isNoticesTabEnabled":true,"enableNewTagCreationWarning":true,"insertSpaceAfterNameTabCompletion":false,"id":1,"childUrl":"https://meta.stackoverflow.com","enableSocialMediaInSharePopup":true,"protocol":"https"},"user":{"fkey":"6c42a074481af7f280b1bdf436da5c0a072cd5f1981f1f88990de49322dc46b2","tid":"759be4e9-aafe-45b4-b4c2-cd854d6d026b","rep":0,"isAnonymous":true,"isAnonymousNetworkWide":true},"events":{"postType":{"question":1},"postEditionSection":{"title":1,"body":2,"tags":3}},"story":{"minCompleteBodyLength":75,"likedTagsMaxLength":300,"dislikedTagsMaxLength":300},"jobPreferences":{"maxNumDeveloperRoles":2,"maxNumIndustries":4},"svgIconPath":"https://cdn.sstatic.net/Img/svg-icons","svgIconHash":"d5683df72f21"}, {"userProfile":{"openGraphAPIKey":"4a307e43-b625-49bb-af15-ffadf2bda017"},"userMessaging":{"showNewFeatureNotice":true},"tags":{},"snippets":{"snippetsEnabled":true,"renderDomain":"stacksnippets.net"},"slack":{"sidebarAdDismissCookie":"slack-sidebar-ad"},"site":{"allowImageUploads":true,"enableUserHovercards":true,"styleCode":true,"enableImgurHttps":true,"forceHttpsImages":true},"paths":{},"monitoring":{"clientTimingsAbsoluteTimeout":30000,"clientTimingsDebounceTimeout":1000},"mentions":{"maxNumUsersInDropdown":50},"markdown":{"asteriskIntraWordEmphasis":true},"flags":{"allowRetractingFlags":true},"comments":{},"accounts":{"currentPasswordRequiredForChangingStackIdPassword":true}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"9c9a40e95650","js/moderator.en.js":"7d5283fc5a46","js/pseudomoderator.en.js":"81279009c185","js/full-anon.en.js":"006bb5954bfb","js/full.en.js":"c88ffe0e7ae6","js/wmd.en.js":"4e7899246a3c","js/mobile.en.js":"4f3f2f15412f","js/help.en.js":"10fdc2a49c20","js/tageditor.en.js":"58dcbe3bac4c","js/tageditornew.en.js":"7aa7040e1b36","js/inline-tag-editing.en.js":"36c139c36d83","js/revisions.en.js":"63c4156ea488","js/review.en.js":"c40a15a49ce9","js/tagsuggestions.en.js":"b278f9a0b23b","js/post-validation.en.js":"cf38c4e2a6df","js/explore-qlist.en.js":"5c7424c271ef","js/events.en.js":"0ccc6b2e5a91","js/keyboard-shortcuts.en.js":"a75c12957203","js/adops.en.js":"22a9bd59b1e9","js/begin-edit-event.en.js":"3238dd301e69","js/stacks-polyfills.en.js":"0c7b4b271312","js/snippet-javascript-codemirror.en.js":"530f093c7f92"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+    </script>
+<noscript id="noscript-css"><style>body,.top-bar{margin-top:1.9em}</style></noscript>
+</head>
+<body class="question-page unified-theme">
+<div id="notify-container"></div>
+<div id="custom-header"></div>
+<header class="top-bar js-top-bar top-bar__network _fixed">
+<div class="-container">
+<div class="-main">
+<a class="left-sidebar-toggle p0 ai-center jc-center js-left-sidebar-toggle" href="#"><span class="ps-relative"></span></a>
+<a class="-logo js-gps-track" data-gps-track="top_nav.click({is_current:false, location:2, destination:8})" href="https://stackoverflow.com">
+<span class="-img _glyph">Stack Overflow</span>
+</a>
+</div>
+<form action="/search" autocomplete="off" class="searchbar js-searchbar" id="search" method="get" role="search">
+<div class="ps-relative">
+<input autocomplete="off" class="s-input js-search-field" maxlength="240" name="q" placeholder="Search…" type="text" value=""/>
+<button aria-label="Search…" class="s-btn s-btn__primary s-btn__icon btn-topbar-primary js-search-submit" type="submit"><svg aria-hidden="true" class="svg-icon iconSearch" height="18" viewbox="0 0 18 18" width="18"><path d="M18 16.5l-5.14-5.18h-.35a7 7 0 1 0-1.19 1.19v.35L16.5 18l1.5-1.5zM12 7A5 5 0 1 1 2 7a5 5 0 0 1 10 0z"></path></svg></button>
+</div>
+</form>
+<ol class="-secondary js-secondary-topbar-links drop-icons-responsively user-logged-out">
+<li class="-item searchbar-trigger js-searchbar-trigger"><a class="-link" href="#"><svg aria-hidden="true" class="svg-icon iconSearch" height="18" viewbox="0 0 18 18" width="18"><path d="M18 16.5l-5.14-5.18h-.35a7 7 0 1 0-1.19 1.19v.35L16.5 18l1.5-1.5zM12 7A5 5 0 1 1 2 7a5 5 0 0 1 10 0z"></path></svg></a></li>
+<li class="-item inbox-button-item" data-remove-order="1">
+<a class="-link js-inbox-button" href="https://stackexchange.com/users/?tab=inbox" title="Recent inbox messages">
+<svg aria-hidden="true" class="svg-icon iconInbox" height="18" viewbox="0 0 20 18" width="20"><path d="M4.63 1h10.56a2 2 0 0 1 1.94 1.35L20 10.79V15a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-4.21l2.78-8.44c.25-.8 1-1.36 1.85-1.35zm8.28 12l2-2h2.95l-2.44-7.32a1 1 0 0 0-.95-.68H5.35a1 1 0 0 0-.95.68L1.96 11h2.95l2 2h6z"></path></svg>
+<span class="indicator-badge js-unread-count _important" style="display: none;"></span>
+</a>
+</li>
+<li class="-item achievements-button-item" data-remove-order="2">
+<a class="-link js-achievements-button" data-unread-class="_highlighted-positive" href="https://stackexchange.com/users/?tab=reputation" title="Recent achievements: reputation, badges, and privileges earned">
+<svg aria-hidden="true" class="svg-icon iconAchievements" height="18" viewbox="0 0 18 18" width="18"><path d="M15 2V1H3v1H0v4c0 1.6 1.4 3 3 3v1c.4 1.5 3 2.6 5 3v2H5s-1 1.5-1 2h10c0-.4-1-2-1-2h-3v-2c2-.4 4.6-1.5 5-3V9c1.6-.2 3-1.4 3-3V2h-3zM3 7c-.5 0-1-.5-1-1V4h1v3zm8.4 2.5L9 8 6.6 9.4l1-2.7L5 5h3l1-2.7L10 5h2.8l-2.3 1.8 1 2.7h-.1zM16 6c0 .5-.5 1-1 1V4h1v2z"></path></svg>
+<span class="indicator-badge js-unread-count _positive" style="display: none;"></span>
+</a>
+</li>
+<li class="-item help-button-item"><a class="-link js-help-button" href="#" title="Help Center and other resources">
+<svg aria-hidden="true" class="svg-icon iconHelp" height="18" viewbox="0 0 18 18" width="18"><path d="M9 1a8 8 0 1 0 0 16A8 8 0 0 0 9 1zm.81 12.13c-.02.71-.55 1.15-1.24 1.13-.66-.02-1.17-.49-1.15-1.2.02-.72.56-1.18 1.22-1.16.7.03 1.2.51 1.17 1.23zM11.77 8c-.3.34-.65.65-1.02.91l-.53.37c-.26.2-.42.43-.5.69a4 4 0 0 0-.09.75c0 .05-.03.16-.18.16H7.88c-.16 0-.18-.1-.18-.15.03-.66.12-1.21.4-1.66.4-.49.88-.9 1.43-1.22.16-.12.28-.25.38-.39a1.34 1.34 0 0 0 .02-1.71c-.24-.31-.51-.46-1.03-.46-.51 0-.8.26-1.02.6-.21.33-.18.73-.18 1.1H5.75c0-1.38.35-2.25 1.1-2.76.52-.35 1.17-.5 1.93-.5 1 0 1.79.18 2.49.71.64.5.98 1.18.98 2.12 0 .57-.2 1.05-.48 1.44z"></path></svg>
+</a></li>
+<li class="-item site-switcher-item">
+<a class="-link js-site-switcher-button js-gps-track" data-gps-track="site_switcher.show" href="https://stackexchange.com" title="A list of all 175 Stack Exchange sites">
+<svg aria-hidden="true" class="svg-icon iconStackExchange" height="18" viewbox="0 0 18 18" width="18"><path d="M15 1H3a2 2 0 0 0-2 2v2h16V3a2 2 0 0 0-2-2zM1 13c0 1.1.9 2 2 2h8v3l3-3h1a2 2 0 0 0 2-2v-2H1v2zm16-7H1v4h16V6z"></path></svg>
+</a>
+</li>
+<li class="-ctas">
+<a class="login-link s-btn btn-topbar-clear py8" href="https://stackoverflow.com/users/login?ssrc=head&amp;returnurl=https%3a%2f%2fstackoverflow.com%2fquestions%2f54728650%2furllib-opening-a-url-always-gets-429-too-many-requests" rel="nofollow">Log In</a>
+<a class="login-link s-btn s-btn__primary py8 btn-topbar-primary" data-ga='["sign up","Sign Up Navigation","Header",null,null]' href="https://stackoverflow.com/users/signup?ssrc=head&amp;returnurl=%2fusers%2fstory%2fcurrent" rel="nofollow">Sign Up</a>
+</li>
+<li class="-dialog-container js-topbar-dialog-corral">
+<div class="topbar-dialog siteSwitcher-dialog dno">
+<div class="header">
+<h3><a href="https://stackoverflow.com">current community</a>
+</h3>
+</div>
+<div class="modal-content current-site-container">
+<ul class="current-site">
+<li class="grid">
+<div class="fl1">
+<a class="current-site-link site-link js-gps-track grid gs8 gsx" data-gps-track="site_switcher.click({ item_type:3 })" data-id="1" href="https://stackoverflow.com">
+<div class="favicon favicon-stackoverflow site-icon grid--cell" title="Stack Overflow"></div>
+<span class="grid--cell fl1">
+            Stack Overflow
+        </span>
+</a>
+</div>
+<div class="related-links">
+<a class="js-gps-track" data-gps-track="site_switcher.click({ item_type:14 })" href="https://stackoverflow.com/help">help</a>
+<a class="js-gps-track" data-gps-track="site_switcher.click({ item_type:6 })" href="https://chat.stackoverflow.com">chat</a>
+</div>
+</li>
+<li class="related-site grid">
+<div class="L-shaped-icon-container">
+<span class="L-shaped-icon"></span>
+</div>
+<a class="site-link js-gps-track grid gs8 gsx" data-gps-track="site.switch({ target_site:552, item_type:3 }),site_switcher.click({ item_type:4 })" data-id="552" href="https://meta.stackoverflow.com">
+<div class="favicon favicon-stackoverflowmeta site-icon grid--cell" title="Meta Stack Overflow"></div>
+<span class="grid--cell fl1">
+            Meta Stack Overflow
+        </span>
+</a>
+</li>
+</ul>
+</div>
+<div class="header" id="your-communities-header">
+<h3>
+your communities            </h3>
+</div>
+<div class="modal-content" id="your-communities-section">
+<div class="call-to-login">
+<a class="login-link js-gps-track" data-gps-track="site_switcher.click({ item_type:10 })" href="https://stackoverflow.com/users/signup?ssrc=site_switcher&amp;returnurl=%2fusers%2fstory%2fcurrent">Sign up</a> or <a class="login-link js-gps-track" data-gps-track="site_switcher.click({ item_type:11 })" href="https://stackoverflow.com/users/login?ssrc=site_switcher&amp;returnurl=https%3a%2f%2fstackoverflow.com%2fquestions%2f54728650%2furllib-opening-a-url-always-gets-429-too-many-requests">log in</a> to customize your list.
+                </div>
+</div>
+<div class="header">
+<h3><a href="https://stackexchange.com/sites">more stack exchange communities</a>
+</h3>
+<a class="fr" href="https://stackoverflow.blog">company blog</a>
+</div>
+<div class="modal-content">
+<div class="child-content"></div>
+</div>
+</div>
+<div class="topbar-dialog help-dialog js-help-dialog dno">
+<div class="modal-content">
+<ul>
+<li>
+<a class="js-gps-track" data-gps-track="help_popup.click({ item_type:1 })" href="/tour">
+                            Tour
+                            <span class="item-summary">
+                                Start here for a quick overview of the site
+                            </span>
+</a>
+</li>
+<li>
+<a class="js-gps-track" data-gps-track="help_popup.click({ item_type:4 })" href="/help">
+                        Help Center
+                        <span class="item-summary">
+                            Detailed answers to any questions you might have
+                        </span>
+</a>
+</li>
+<li>
+<a class="js-gps-track" data-gps-track="help_popup.click({ item_type:2 })" href="https://meta.stackoverflow.com">
+                                Meta
+                                <span class="item-summary">
+                                    Discuss the workings and policies of this site
+                                </span>
+</a>
+</li>
+<li>
+<a class="js-gps-track" data-gps-track="help_popup.click({ item_type:6 })" href="https://stackoverflow.com/company/about">
+                                About Us
+                                <span class="item-summary">
+                                    Learn more about Stack Overflow the company
+                                </span>
+</a>
+</li>
+<li>
+<a class="js-gps-track" data-gps-track="help_popup.click({ item_type:7 })" href="https://www.stackoverflowbusiness.com/?ref=topbar_help">
+                                Business
+                                <span class="item-summary">
+                                    Learn more about hiring developers or posting ads with us
+                                </span>
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="topbar-dialog leftnav-dialog js-leftnav-dialog dno">
+<div class="left-sidebar js-unpinned-left-sidebar" data-can-be="left-sidebar" data-is-here-when="sm"></div>
+</div>
+</li>
+</ol>
+</div>
+</header>
+<div aria-hidden="false" class="p16 bg-black-700 ff-sans fc-white ps-fixed b0 l0 r0 z-banner" id="js-gdpr-consent-banner" role="banner">
+<div aria-describedby="notice-message" class="wmx8 mx-auto grid jc-center" role="alertdialog">
+<div aria-label="notice-message" class="grid--cell mr12">
+<p class="mb0 lh-lg">
+                    By using our site, you acknowledge that you have read and understand our <a class="s-link s-link__inherit td-underline fc-white" href="https://stackoverflow.com/legal/cookie-policy" target="_blank">Cookie Policy</a>, <a class="s-link s-link__inherit td-underline fc-white" href="https://stackoverflow.com/legal/privacy-policy" target="_blank">Privacy Policy</a>, and our <a class="s-link s-link__inherit td-underline fc-white" href="https://stackoverflow.com/legal/terms-of-service/public" target="_blank">Terms of Service</a>.
+                </p>
+</div>
+<a aria-label="notice-dismiss" class="grid--cell fc-white js-notice-close">
+<svg aria-hidden="true" class="svg-icon m0 iconClear" height="18" viewbox="0 0 18 18" width="18"><path d="M15 4.41L13.59 3 9 7.59 4.41 3 3 4.41 7.59 9 3 13.59 4.41 15 9 10.41 13.59 15 15 13.59 10.41 9 15 4.41z"></path></svg>
+</a>
+</div>
+</div>
+<script>
+        StackExchange.ready(function () { StackExchange.topbar.init({ observeSize: true }); });
+        StackExchange.scrollPadding.setPaddingTop(50, 10);     </script>
+<div class="container">
+<div class="left-sidebar js-pinned-left-sidebar" data-is-here-when="md lg" id="left-sidebar">
+<div class="left-sidebar--sticky-container js-sticky-leftnav">
+<nav role="navigation">
+<ol class="nav-links">
+<li> </li><li>
+<a class="pl8 js-gps-track nav-links--link" data-gps-track="top_nav.click({is_current:false, location:2, destination:8})" href="/">
+Home        </a>
+</li>
+<li>
+<ol class="nav-links">
+<li class="fs-fine tt-uppercase ml8 mt16 mb4 fc-light">Public</li>
+<li class="youarehere">
+<a class="pl8 js-gps-track nav-links--link -link__with-icon" data-gps-track="top_nav.click({is_current:true, location:2, destination:1})" href="/questions" id="nav-questions">
+<svg aria-hidden="true" class="svg-icon iconGlobe" height="18" viewbox="0 0 18 18" width="18"><path d="M9 1a8 8 0 1 0 0 16A8 8 0 0 0 9 1zM8 15.32a6.4 6.4 0 0 1-5.23-7.75L7 11.68v.8c0 .88.12 1.32 1 1.32v1.52zm5.72-2c-.2-.66-1-1.32-1.72-1.32h-1v-2c0-.44-.56-1-1-1H6V7h1c.44 0 1-.56 1-1V5h2c.88 0 1.4-.72 1.4-1.6v-.33a6.4 6.4 0 0 1 2.32 10.24v.01z"></path></svg> <span class="-link--channel-name">Stack Overflow</span>
+</a>
+</li>
+<li>
+<a class="js-gps-track nav-links--link" data-gps-track="top_nav.click({is_current:false, location:2, destination:2})" href="/tags" id="nav-tags">
+Tags        </a>
+</li>
+<li>
+<a class="js-gps-track nav-links--link" data-gps-track="top_nav.click({is_current:false, location:2, destination:3})" href="/users" id="nav-users">
+Users        </a>
+</li>
+<li>
+<a class="js-gps-track nav-links--link" data-gps-track="top_nav.click({is_current:false, location:2, destination:6})" href="/jobs?med=site-ui&amp;ref=jobs-tab" id="nav-jobs">
+Jobs        </a>
+</li>
+</ol>
+</li>
+<li>
+<ol class="nav-links">
+<li class="fs-fine tt-uppercase ml8 mt24 mb4 fc-light">
+                                            Teams
+                                        </li>
+<li class="ps-relative">
+<a class="pl8 js-gps-track nav-links--link -link__with-icon" data-ga='["teams traffic","left nav cta","stackoverflow.com/teams",null,{"dimension4":"teams"}]' data-gps-track="teams.create.left-sidenav.click" href="https://stackoverflow.com/teams" title="A private, secure home for your team's questions and answers. Starts at $10/month">
+<svg aria-hidden="true" class="svg-icon iconPlus" height="18" viewbox="0 0 18 18" width="18"><path d="M10 2H8v6H2v2h6v6h2v-6h6V8h-6z"></path></svg>
+<span class="js-create-team-btn-with-tooltip -link--channel-name">Create Team</span>
+</a>
+<div class="d-none create-team-tooltip js-create-team-tooltip bar-sm bg-blue-500 fc-white l100 md:d-none mln24 new-feature-wrapper p16 pr32 t0 ws2" data-cookie="notice-ctt" data-expire-date="1874310617117">
+<svg aria-hidden="true" class="svg-icon ps-absolute r12 c-pointer iconClearSm" height="14" viewbox="0 0 14 14" width="14"><path d="M12 3.41L10.59 2 7 5.59 3.41 2 2 3.41 5.59 7 2 10.59 3.41 12 7 8.41 10.59 12 12 10.59 8.41 7 12 3.41z"></path></svg>
+<p class="mb0">Q&amp;A for work. A dedicated place to share your team’s knowledge.</p>
+</div>
+<script>
+    StackExchange.ready(function () {
+        StackExchange.Notice.tooltipInit();
+    });
+</script>
+</li>
+</ol>
+</li>
+</ol>
+</nav>
+</div>
+</div>
+<div class="snippet-hidden" id="content">
+<div itemprop="mainEntity" itemscope="" itemtype="http://schema.org/Question">
+<link href="https://cdn.sstatic.net/Sites/stackoverflow/img/apple-touch-icon.png?v=c78bd457575a" itemprop="image"/>
+<div class="inner-content clearfix">
+<div class="grid" id="question-header">
+<h1 class="grid--cell fs-headline1 fl1 ow-break-word" itemprop="name"><a class="question-hyperlink" href="/questions/54728650/urllib-opening-a-url-always-gets-429-too-many-requests">urllib: Opening a url always gets 429: Too many requests</a></h1>
+<div aria-label="ask new question" class="pl8 aside-cta grid--cell" role="navigation">
+<a class="d-inline-flex ai-center ws-nowrap s-btn s-btn__primary" href="/questions/ask">
+            Ask Question
+        </a>
+</div>
+</div>
+<div aria-label="question and answers" id="mainbar" role="main">
+<div class="question" data-questionid="54728650" id="question">
+<style>.everyoneloves__top-leaderboard:empty,.everyoneloves__mid-leaderboard:empty,.everyoneloves__bot-mid-leaderboard:empty{                height:90px;width:728px;box-sizing:border-box;
+}</style>
+<div class="everyonelovesstackoverflow everyoneloves__top-leaderboard" id="dfp-tlb"></div>
+<div class="post-layout">
+<div class="votecell post-layout--left">
+<div class="js-voting-container grid fd-column ai-stretch gs4 fc-black-200" data-post-id="54728650">
+<button aria-label="up vote" aria-pressed="false" class="js-vote-up-btn grid--cell s-btn s-btn__unset c-pointer" data-selected-classes="fc-theme-primary" title="This question shows research effort; it is useful and clear"><svg aria-hidden="true" class="svg-icon m0 iconArrowUpLg" height="36" viewbox="0 0 36 36" width="36"><path d="M2 26h32L18 10 2 26z"></path></svg></button>
+<div class="js-vote-count grid--cell fc-black-500 fs-title grid fd-column ai-center" data-value="0" itemprop="upvoteCount">0</div>
+<button aria-label="down vote" aria-pressed="false" class="js-vote-down-btn grid--cell s-btn s-btn__unset c-pointer" data-selected-classes="fc-theme-primary" title="This question does not show any research effort; it is unclear or not useful"><svg aria-hidden="true" class="svg-icon m0 iconArrowDownLg" height="36" viewbox="0 0 36 36" width="36"><path d="M2 10h32L18 26 2 10z"></path></svg></button>
+<button aria-label="favorite" aria-pressed="false" class="js-favorite-btn s-btn s-btn__unset c-pointer py8" data-selected-classes="fc-yellow-600">
+<svg aria-hidden="true" class="svg-icon iconStar" height="18" viewbox="0 0 18 18" width="18"><path d="M9 12.65l-5.29 3.63 1.82-6.15L.44 6.22l6.42-.17L9 0l2.14 6.05 6.42.17-5.1 3.9 1.83 6.16L9 12.65z"></path></svg>
+<div class="js-favorite-count mt8" data-value=""></div>
+</button>
+</div>
+</div>
+<div class="postcell post-layout--right">
+<div class="post-text" itemprop="text">
+<p>I just got started with the <code>urllib</code> module. I'm trying to scrape products from supermarkets and there's a website that seems to <strong>always</strong> respond with an <code>HTTP Error 429: Too many requests</code>. I already did a bit of research on the Stack Overflow and no one seems to have the same problem. My code is as simple as it can get:</p>
+<pre><code>&gt;&gt;&gt; import urllib.request
+&gt;&gt;&gt; resp = urllib.request.urlopen("https://shop.coles.com.au/a/a-national/product/head-shoulders-shampoo-conditioner-2in1-deep-clean")
+Traceback (most recent call last):
+  File "&lt;pyshell#1&gt;", line 1, in &lt;module&gt;
+    resp = urllib.request.urlopen("https://shop.coles.com.au/a/a-national/product/head-shoulders-shampoo-conditioner-2in1-deep-clean")
+  File "C:\Users\thank\AppData\Local\Programs\Python\Python37\lib\urllib\request.py", line 222, in urlopen
+return opener.open(url, data, timeout)
+  File "C:\Users\thank\AppData\Local\Programs\Python\Python37\lib\urllib\request.py", line 531, in open
+response = meth(req, response)
+  File "C:\Users\thank\AppData\Local\Programs\Python\Python37\lib\urllib\request.py", line 640, in http_response
+'http', request, response, code, msg, hdrs)
+  File "C:\Users\thank\AppData\Local\Programs\Python\Python37\lib\urllib\request.py", line 568, in error
+return self._call_chain(*args)
+  File "C:\Users\thank\AppData\Local\Programs\Python\Python37\lib\urllib\request.py", line 503, in _call_chain
+result = func(*args)
+  File "C:\Users\thank\AppData\Local\Programs\Python\Python37\lib\urllib\request.py", line 648, in http_error_default
+raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 429: Too Many Requests
+</code></pre>
+<p>I've also tried to modify the user-agent as <a href="https://stackoverflow.com/a/13214012">this answer</a> suggests, but the result is still the same</p>
+<p>Can someone explain which default settings inside the urllib module may cause the problem? Or is it because the website blocks bots? Other product pages of the website don't work either.</p>
+</div>
+<div class="post-taglist grid gs4 gsy fd-column">
+<div class="grid ps-relative d-block">
+<a class="post-tag" href="/questions/tagged/python" rel="tag" title="show questions tagged 'python'">python</a> <a class="post-tag" href="/questions/tagged/urllib" rel="tag" title="show questions tagged 'urllib'">urllib</a> <a class="post-tag" href="/questions/tagged/http-status-code-429" rel="tag" title="show questions tagged 'http-status-code-429'">http-status-code-429</a>
+</div>
+</div>
+<div class="mb0">
+<div class="mt16 pt4 grid gs8 gsy fw-wrap jc-end ai-start">
+<div class="grid--cell mr16" style="flex: 1 1 100px;">
+<div class="post-menu"><a class="short-link" href="/q/54728650" id="link-post-54728650" itemprop="url" title="short permalink to this question">share</a><span class="lsep">|</span><a class="suggest-edit-post" href="/posts/54728650/edit" title="">improve this question</a></div>
+</div>
+<div class="post-signature grid--cell">
+<div class="user-info">
+<div class="user-action-time">
+<a href="/posts/54728650/revisions" title="show all edits to this post">edited <span class="relativetime" title="2019-02-17 01:57:14Z">Feb 17 at 1:57</span></a>
+</div>
+<div class="user-gravatar32">
+</div>
+<div class="user-details" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+<span class="d-none" itemprop="name">Mike Pham</span>
+<div class="-flair">
+</div>
+</div>
+</div> </div>
+<div class="post-signature owner grid--cell">
+<div class="user-info">
+<div class="user-action-time">
+        asked <span class="relativetime" title="2019-02-16 23:23:06Z">Feb 16 at 23:23</span>
+</div>
+<div class="user-gravatar32">
+<a href="/users/10402892/mike-pham"><div class="gravatar-wrapper-32"><img alt="" height="32" src="https://lh3.googleusercontent.com/-YH4t2QVJtf0/AAAAAAAAAAI/AAAAAAAAUTE/XozykhUudVA/photo.jpg?sz=32" width="32"/></div></a>
+</div>
+<div class="user-details" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+<a href="/users/10402892/mike-pham">Mike Pham</a><span class="d-none" itemprop="name">Mike Pham</span>
+<div class="-flair">
+<span class="reputation-score" dir="ltr" title="reputation score ">50</span><span title="6 bronze badges"><span class="badge3"></span><span class="badgecount">6</span></span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="post-layout--right">
+<div class="comments js-comments-container" data-post-id="54728650" id="comments-54728650">
+<ul class="comments-list js-comments-list" data-addlink-disabled="true" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-remaining-comments-count="0">
+<li class="comment js-comment" data-comment-id="96242430" id="comment-96242430">
+<div class="js-comment-actions comment-actions">
+<div class="comment-score js-comment-edit-hide">
+<span class="cool" title="number of 'useful comment' votes received">1</span>
+</div>
+</div>
+<div class="comment-text js-comment-text-and-form">
+<div class="comment-body js-comment-edit-hide">
+<span class="comment-copy">429 means you're spamming their endpoints more than they would like. Sometimes in the body of the request they'll tell you how long to wait until trying again, so I'd start there.</span>
+                
+                    – <a class="comment-user" href="/users/1594286/shadow" title="4,718 reputation">Shadow</a>
+<span class="comment-date" dir="ltr"><span class="relativetime-clean" title="2019-02-17 02:01:43Z">Feb 17 at 2:01</span></span>
+</div>
+</div>
+</li>
+<li class="comment js-comment" data-comment-id="96257379" id="comment-96257379">
+<div class="js-comment-actions comment-actions">
+<div class="comment-score js-comment-edit-hide">
+</div>
+</div>
+<div class="comment-text js-comment-text-and-form">
+<div class="comment-body js-comment-edit-hide">
+<span class="comment-copy">If you're just getting started with learning how to scrape web sites you should not be accessing public sites. You should experiment, and learn, by scraping your own web server. Then take some time to learn about mechanisms like the <code>robots.txt</code> file and scraping best practices.</span>
+                
+                    – <a class="comment-user" href="/users/4276647/kurtis-rader" title="3,488 reputation">Kurtis Rader</a>
+<span class="comment-date" dir="ltr"><span class="relativetime-clean" title="2019-02-17 20:37:29Z">Feb 17 at 20:37</span></span>
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div data-anon="true" data-rep="50" id="comments-link-54728650">
+<a class="js-add-link comments-link disabled-link" title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments.">add a comment</a><span class="js-link-separator dno"> | </span>
+<a class="js-show-link comments-link dno" href="#" onclick="" title="expand to show all comments on this post"></a>
+</div>
+</div> </div>
+</div>
+<div class="everyonelovesstackoverflow everyoneloves__inline-sidebar" id="dfp-isb"></div>
+<div id="answers">
+<a name="tab-top"></a>
+<div id="answers-header">
+<div class="subheader answers-subheader">
+<h2 data-answercount="1">
+                                1 Answer
+                            <span itemprop="answerCount" style="display:none;">1</span>
+</h2>
+<div>
+<div id="tabs">
+<a data-nav-xhref="" data-shortcut="A" data-value="active" href="/questions/54728650/urllib-opening-a-url-always-gets-429-too-many-requests?answertab=active#tab-top" title="Answers with the latest activity first">
+            active</a>
+<a data-nav-xhref="" data-shortcut="O" data-value="oldest" href="/questions/54728650/urllib-opening-a-url-always-gets-429-too-many-requests?answertab=oldest#tab-top" title="Answers in the order they were provided">
+            oldest</a>
+<a class="youarehere is-selected" data-nav-xhref="" data-shortcut="V" data-value="votes" href="/questions/54728650/urllib-opening-a-url-always-gets-429-too-many-requests?answertab=votes#tab-top" title="Answers with the highest score first">
+            votes</a>
+</div>
+</div>
+</div>
+</div>
+<a name="54729486"></a>
+<div class="answer" data-answerid="54729486" id="answer-54729486" itemprop="suggestedAnswer" itemscope="" itemtype="http://schema.org/Answer">
+<div class="post-layout">
+<div class="votecell post-layout--left">
+<div class="js-voting-container grid fd-column ai-stretch gs4 fc-black-200" data-post-id="54729486">
+<button aria-label="up vote" aria-pressed="false" class="js-vote-up-btn grid--cell s-btn s-btn__unset c-pointer" data-selected-classes="fc-theme-primary" title="This answer is useful"><svg aria-hidden="true" class="svg-icon m0 iconArrowUpLg" height="36" viewbox="0 0 36 36" width="36"><path d="M2 26h32L18 10 2 26z"></path></svg></button>
+<div class="js-vote-count grid--cell fc-black-500 fs-title grid fd-column ai-center" data-value="1" itemprop="upvoteCount">1</div>
+<button aria-label="down vote" aria-pressed="false" class="js-vote-down-btn grid--cell s-btn s-btn__unset c-pointer" data-selected-classes="fc-theme-primary" title="This answer is not useful"><svg aria-hidden="true" class="svg-icon m0 iconArrowDownLg" height="36" viewbox="0 0 36 36" width="36"><path d="M2 10h32L18 26 2 10z"></path></svg></button>
+<div aria-label="accepted" class="js-accepted-answer-indicator grid--item fc-green-500 ta-center p4 d-none" role="note" tabindex="0" title="loading when this answer was accepted..."><svg aria-hidden="true" class="svg-icon iconCheckmarkLg" height="36" viewbox="0 0 36 36" width="36"><path d="M6 14l8 8L30 6v8L14 30l-8-8v-8z"></path></svg></div>
+</div>
+</div>
+<div class="answercell post-layout--right">
+<div class="post-text" itemprop="text">
+<p>429 is server asking you to stop. Basically, the web server thinks you are trying to spam or scrape and it doesn't like it. Generally you should honor the server and if there is try after some time with 429 response you should follow it. </p>
+<p>If you feel you are wrongly been asked by the server, either you can make sure that your user request is **similar" to the user request generated by an user from the browser, which will include user-agent and all the other information a regular browser would send with the request. If the server is sending you 429 despite that most probably either it has blocked your ip temporarily or permanently. In that you should look how to scrape through multiple ips.</p>
+</div>
+<div class="grid mb0 fw-wrap ai-start jc-end gs8 gsy">
+<time datetime="2019-02-17T02:05:00" itemprop="dateCreated"></time>
+<div class="grid--cell mr16" style="flex: 1 1 100px;">
+<div class="post-menu"><a class="short-link" href="/a/54729486" id="link-post-54729486" itemprop="url" title="short permalink to this answer">share</a><span class="lsep">|</span><a class="suggest-edit-post" href="/posts/54729486/edit" title="">improve this answer</a></div> </div>
+<div class="post-signature grid--cell fl0">
+<div class="user-info user-hover">
+<div class="user-action-time">
+        answered <span class="relativetime" title="2019-02-17 02:05:00Z">Feb 17 at 2:05</span>
+</div>
+<div class="user-gravatar32">
+<a href="/users/41968/biswanath"><div class="gravatar-wrapper-32"><img alt="" height="32" src="https://www.gravatar.com/avatar/94a507d8a75d51986af74da4918f58ec?s=32&amp;d=identicon&amp;r=PG" width="32"/></div></a>
+</div>
+<div class="user-details" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+<a href="/users/41968/biswanath">Biswanath</a><span class="d-none" itemprop="name">Biswanath</span>
+<div class="-flair">
+<span class="reputation-score" dir="ltr" title="reputation score ">5,124</span><span title="10 gold badges"><span class="badge1"></span><span class="badgecount">10</span></span><span title="38 silver badges"><span class="badge2"></span><span class="badgecount">38</span></span><span title="56 bronze badges"><span class="badge3"></span><span class="badgecount">56</span></span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="post-layout--right">
+<div class="comments js-comments-container dno" data-post-id="54729486" id="comments-54729486">
+<ul class="comments-list js-comments-list" data-addlink-disabled="true" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-remaining-comments-count="0">
+</ul>
+</div>
+<div data-anon="true" data-rep="50" id="comments-link-54729486">
+<a class="js-add-link comments-link disabled-link" title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno"> | </span>
+<a class="js-show-link comments-link dno" href="#" onclick="" title="expand to show all comments on this post"></a>
+</div>
+</div> </div>
+</div>
+<div class="everyonelovesstackoverflow everyoneloves__bot-mid-leaderboard" id="dfp-bmlb"></div> <a name="new-answer"></a>
+<form action="/questions/54728650/answer/submit" class="post-form" id="post-form" method="post">
+<input id="post-id" type="hidden" value="54728650"/>
+<input id="qualityBanWarningShown" name="qualityBanWarningShown" type="hidden" value="false"/>
+<input name="referrer" type="hidden" value=""/>
+<h2 class="space">
+                                Your Answer
+                            </h2>
+<script>
+            StackExchange.ifUsing("editor", function () {
+                StackExchange.using("externalEditor", function () {
+                    StackExchange.using("snippets", function () {
+                        StackExchange.snippets.init();
+                    });
+                });
+            }, "code-snippets");
+        </script>
+<script>
+    StackExchange.ready(function() {
+        var channelOptions = {
+            tags: "".split(" "),
+            id: "1"
+        };
+        initTagRenderer("".split(" "), "".split(" "), channelOptions);
+       
+        StackExchange.using("externalEditor", function() {
+                // Have to fire editor after snippets, if snippets enabled
+                if (StackExchange.settings.snippets.snippetsEnabled) {
+                    StackExchange.using("snippets", function() {
+                        createEditor();
+                    });
+                }
+                else {
+                    createEditor();
+                }
+            });
+
+            function createEditor() {
+                StackExchange.prepareEditor({
+                    heartbeatType: 'answer',
+                    autoActivateHeartbeat: false,
+                    convertImagesToLinks: true,
+                noModals: true,
+                showLowRepImageUploadWarning: true,
+                reputationToPostImages: 10,
+                bindNavPrevention: true,
+                postfix: "",
+                imageUploader: {
+                    brandingHtml: "Powered by \u003ca class=\"icon-imgur-white\" href=\"https://imgur.com/\"\u003e\u003c/a\u003e",
+                    contentPolicyHtml: "User contributions licensed under \u003ca href=\"https://creativecommons.org/licenses/by-sa/3.0/\"\u003ecc by-sa 3.0 with attribution required\u003c/a\u003e \u003ca href=\"https://stackoverflow.com/legal/content-policy\"\u003e(content policy)\u003c/a\u003e",
+                    allowUrls: true
+                },
+                    onDemand: true,
+                    discardSelector: ".discard-answer"
+                    ,immediatelyShowMarkdownHelp:true
+                    });
+                
+
+        }
+    });
+</script>
+<div class="post-editor js-post-editor js-wz-element" data-wz-state="8,16,32,64,128,256" id="post-editor">
+<div class="ps-relative">
+<div class="wmd-container mb8">
+<div class="wmd-button-bar btr-sm" id="wmd-button-bar"></div>
+<div class="js-stacks-validation">
+<div class="ps-relative">
+<textarea class="wmd-input js-wz-element s-input bar0" cols="92" data-min-length="" data-wz-state="256" id="wmd-input" name="post-text" rows="15" tabindex="101"></textarea>
+</div>
+<div class="s-input-message mt4 d-none js-stacks-validation-message"></div>
+</div>
+</div>
+</div>
+<aside aria-hidden="true" class="grid ai-start jc-space-between js-answer-help s-notice s-notice__warning pb0 pr4 pt4 mb8 d-none" role="status">
+<div class="grid--cell pt8">
+<p>Thanks for contributing an answer to Stack Overflow!</p><ul><li>Please be sure to <em>answer the question</em>. Provide details and share your research!</li></ul><p>But <em>avoid</em> …</p><ul><li>Asking for help, clarification, or responding to other answers.</li><li>Making statements based on opinion; back them up with references or personal experience.</li></ul><p>To learn more, see our <a href="/help/how-to-answer">tips on writing great answers</a>.</p>
+</div>
+<button class="grid--cell js-answer-help-close-btn s-btn s-btn__muted fc-dark">
+<svg aria-hidden="true" class="svg-icon iconClear" height="18" viewbox="0 0 18 18" width="18"><path d="M15 4.41L13.59 3 9 7.59 4.41 3 3 4.41 7.59 9 3 13.59 4.41 15 9 10.41 13.59 15 15 13.59 10.41 9 15 4.41z"></path></svg>
+</button>
+</aside>
+<div class="draft-saved community-option fl" id="draft-saved" style="height:24px; display:none;">draft saved</div>
+<div class="draft-discarded community-option fl" id="draft-discarded" style="height:24px; display:none;">draft discarded</div>
+<div class="wmd-preview" id="wmd-preview"></div>
+<div></div>
+<div class="edit-block">
+<input id="fkey" name="fkey" type="hidden" value="6c42a074481af7f280b1bdf436da5c0a072cd5f1981f1f88990de49322dc46b2"/>
+<input id="author" name="author" type="text"/>
+</div>
+</div>
+<div class="ps-relative">
+<div class="form-item dno new-post-login p0 my16">
+<div class="grid gs16 md:fd-column new-login-form">
+<div class="grid fd-column w50 md:w-auto gsy gs8 jc-space-between new-login-left">
+<h3 class="grid--cell fs-title">Sign up or <a href="/users/login?ssrc=question_page&amp;returnurl=https%3a%2f%2fstackoverflow.com%2fquestions%2f54728650%2furllib-opening-a-url-always-gets-429-too-many-requests%23new-answer" id="login-link">log in</a></h3>
+<script>
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                            });
+                        </script>
+<div class="grid--cell ta-center s-btn s-btn__muted s-btn__outlined s-btn__icon google-login" data-ga='["sign up","Sign Up Started - Google","New Post",null,null]'>
+<svg aria-hidden="true" class="svg-icon native iconGoogle" height="18" viewbox="0 0 18 18" width="18"><path d="M16.51 8H8.98v3h4.3c-.18 1-.74 1.48-1.6 2.04v2.01h2.6a7.8 7.8 0 0 0 2.38-5.88c0-.57-.05-.66-.15-1.18z" fill="#4285F4"></path><path d="M8.98 17c2.16 0 3.97-.72 5.3-1.94l-2.6-2a4.8 4.8 0 0 1-7.18-2.54H1.83v2.07A8 8 0 0 0 8.98 17z" fill="#34A853"></path><path d="M4.5 10.52a4.8 4.8 0 0 1 0-3.04V5.41H1.83a8 8 0 0 0 0 7.18l2.67-2.07z" fill="#FBBC05"></path><path d="M8.98 4.18c1.17 0 2.23.4 3.06 1.2l2.3-2.3A8 8 0 0 0 1.83 5.4L4.5 7.49a4.77 4.77 0 0 1 4.48-3.3z" fill="#EA4335"></path></svg> Sign up using Google
+                        </div>
+<div class="grid--cell ta-center s-btn s-btn__muted s-btn__icon facebook-login" data-ga='["sign up","Sign Up Started - Facebook","New Post",null,null]'>
+<svg aria-hidden="true" class="svg-icon iconFacebook" height="18" viewbox="0 0 18 18" width="18"><path d="M1.88 1C1.4 1 1 1.4 1 1.88v14.24c0 .48.4.88.88.88h7.67v-6.2H7.46V8.4h2.09V6.61c0-2.07 1.26-3.2 3.1-3.2.88 0 1.64.07 1.87.1v2.16h-1.29c-1 0-1.19.48-1.19 1.18V8.4h2.39l-.31 2.42h-2.08V17h4.08c.48 0 .88-.4.88-.88V1.88c0-.48-.4-.88-.88-.88H1.88z" fill="#3C5A96"></path></svg> Sign up using Facebook
+                        </div>
+<div class="grid--cell ta-center s-btn s-btn__muted s-btn__outlined s-btn__icon stackexchange-login" data-ga='["sign up","Sign Up Navigation","New Post",null,null]'>
+<svg aria-hidden="true" class="svg-icon native iconLogoGlyphXSm" height="18" viewbox="0 0 18 18" width="18"><path d="M14 16v-5h2v7H2v-7h2v5h10z" fill="#BCBBBB"></path><path d="M12.09.72l-1.21.9 4.5 6.07 1.22-.9L12.09.71zM5 15h8v-2H5v2zm9.15-5.87L8.35 4.3l.96-1.16 5.8 4.83-.96 1.16zm-7.7-1.47l6.85 3.19.63-1.37-6.85-3.2-.63 1.38zm6.53 5L5.4 11.39l.38-1.67 7.42 1.48-.22 1.46z" fill="#F48024"></path></svg> Sign up using Email and Password
+                        </div>
+</div>
+<input class="use-facebook" name="use-facebook" type="hidden" value="false"/>
+<input class="use-google" name="use-google" type="hidden" value="false"/>
+<input class="submit-openid" style="display:none" type="button" value="Submit"/>
+<div class="grid gsy gs8 fd-column w50 md:w-auto new-login-right form-item p0">
+<h3 class="grid--cell fs-title">Post as a guest</h3>
+<div class="grid--cell">
+<div class="grid gs4 gsy fd-column">
+<label class="s-label" for="display-name">Name</label>
+<div class="grid ps-relative">
+<input class="s-input" id="display-name" maxlength="30" name="display-name" placeholder="" tabindex="105" type="text" value=""/>
+</div>
+</div>
+</div>
+<div class="grid--cell">
+<div class="grid gs4 gsy fd-column">
+<div class="grid--cell">
+<div class="grid gs2 gsy fd-column">
+<label class="grid--cell s-label" for="m-address">Email</label>
+<p class="grid--cell s-description">Required, but never shown</p>
+</div>
+</div>
+<div class="grid ps-relative">
+<input class="s-input" id="m-address" name="m-address" placeholder="" size="40" tabindex="106" type="text" value=""/>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+                StackExchange.ready(
+                    function () {
+                        StackExchange.openid.initPostLogin('.new-post-login', 'https%3a%2f%2fstackoverflow.com%2fquestions%2f54728650%2furllib-opening-a-url-always-gets-429-too-many-requests%23new-answer', 'question_page');
+                    }
+                );
+            </script>
+<noscript>
+<h3 class="grid--cell fs-title">Post as a guest</h3>
+<div class="grid--cell">
+<div class="grid gs4 gsy fd-column">
+<label class="s-label" for="display-name">Name</label>
+<div class="grid ps-relative">
+<input class="s-input" id="display-name" maxlength="30" name="display-name" placeholder="" tabindex="105" type="text" value=""/>
+</div>
+</div>
+</div>
+<div class="grid--cell">
+<div class="grid gs4 gsy fd-column">
+<div class="grid--cell">
+<div class="grid gs2 gsy fd-column">
+<label class="grid--cell s-label" for="m-address">Email</label>
+<p class="grid--cell s-description">Required, but never shown</p>
+</div>
+</div>
+<div class="grid ps-relative">
+<input class="s-input" id="m-address" name="m-address" placeholder="" size="40" tabindex="106" type="text" value=""/>
+</div>
+</div>
+</div>
+</noscript>
+</div>
+<div class="form-submit cbt grid gsx gs4">
+<button autocomplete="off" class="grid--cell s-btn s-btn__primary s-btn__icon" id="submit-button" tabindex="120" type="submit">
+Post Your Answer                                    </button>
+<button class="grid--cell s-btn s-btn__danger discard-answer dno">
+                                        Discard
+                                    </button>
+<p class="privacy-policy-agreement">
+                                            By clicking “Post Your Answer”, you agree to our <a class="-link" href="https://stackoverflow.com/legal/terms-of-service/public" name="tos" target="_blank">terms of service</a>, <a class="-link" href="https://stackoverflow.com/legal/privacy-policy" name="privacy" target="_blank">privacy policy</a> and <a class="-link" href="https://stackoverflow.com/legal/cookie-policy" name="cookie" target="_blank">cookie policy</a><input name="legalLinksShown" type="hidden" value="1"/>
+</p>
+</div>
+</form>
+<h2 class="bottom-notice" data-loc="1">
+Not the answer you're looking for?                            Browse other questions tagged <a class="post-tag" href="/questions/tagged/python" rel="tag" title="show questions tagged 'python'">python</a> <a class="post-tag" href="/questions/tagged/urllib" rel="tag" title="show questions tagged 'urllib'">urllib</a> <a class="post-tag" href="/questions/tagged/http-status-code-429" rel="tag" title="show questions tagged 'http-status-code-429'">http-status-code-429</a>  or <a href="/questions/ask">ask your own question</a>.                        </h2>
+</div>
+</div>
+<div aria-label="sidebar" class="show-votes" id="sidebar" role="complementary">
+<div class="module question-stats">
+<table id="qinfo">
+<tr>
+<td>
+<p class="label-key">asked</p>
+</td>
+<td style="padding-left: 10px">
+<p class="label-key" title="2019-02-16 23:23:06Z">
+<b>
+<time datetime="2019-02-16T23:23:06" itemprop="dateCreated">3 months ago</time>
+</b>
+</p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="label-key">viewed</p>
+</td>
+<td style="padding-left: 10px">
+<p class="label-key">
+<b>185 times</b>
+</p>
+</td>
+</tr>
+<tr>
+<td>
+<p class="label-key">active</p>
+</td>
+<td style="padding-left: 10px">
+<p class="label-key"><b><a class="lastactivity-link" href="?lastactivity" title="2019-02-17 02:05:00Z">3 months ago</a></b></p>
+</td>
+</tr>
+</table>
+</div>
+<div class="s-sidebarwidget s-sidebarwidget__yellow s-anchors s-anchors__default mb16" data-tracker="cb=1">
+<div class="s-sidebarwidget--header s-sidebarwidget__small-bold-text">
+                Blog
+            </div>
+<ul class="s-sidebarwidget--content s-sidebarwidget__items pt0 pr16 pb0 pl16">
+<li class="s-sidebarwidget--item grid">
+<div class="grid--cell1 fl-shrink0">
+<a data-ga='["community bulletin board","Blog","https://stackoverflow.blog/2019/05/21/public-data-release-of-stack-overflows-2019-developer-survey/",null,null]' href="https://stackoverflow.blog/2019/05/21/public-data-release-of-stack-overflows-2019-developer-survey/">
+<div class="favicon favicon-stackexchangemeta" title="Meta Stack Exchange"></div> </a>
+</div>
+<div class="grid--cell">
+<a data-ga='["community bulletin board","Blog","https://stackoverflow.blog/2019/05/21/public-data-release-of-stack-overflows-2019-developer-survey/",null,null]' href="https://stackoverflow.blog/2019/05/21/public-data-release-of-stack-overflows-2019-developer-survey/">Public Data Release of Stack Overflow’s 2019 Developer Survey</a>
+</div>
+</li>
+</ul>
+<div class="s-sidebarwidget--header s-sidebarwidget__small-bold-text">
+                Featured on Meta
+            </div>
+<ul class="s-sidebarwidget--content s-sidebarwidget__items pt0 pr16 pb0 pl16">
+<li class="s-sidebarwidget--item grid">
+<div class="grid--cell1 fl-shrink0">
+<a data-ga='["community bulletin board","Featured on Meta","https://meta.stackexchange.com/questions/328475/unicorn-meta-zoo-3-how-do-we-grade-questions",null,null]' href="https://meta.stackexchange.com/questions/328475/unicorn-meta-zoo-3-how-do-we-grade-questions">
+<div class="favicon favicon-stackexchangemeta" title="Meta Stack Exchange"></div> </a>
+</div>
+<div class="grid--cell">
+<a data-ga='["community bulletin board","Featured on Meta","https://meta.stackexchange.com/questions/328475/unicorn-meta-zoo-3-how-do-we-grade-questions",null,null]' href="https://meta.stackexchange.com/questions/328475/unicorn-meta-zoo-3-how-do-we-grade-questions">Unicorn Meta Zoo #3: How do we grade questions?</a>
+</div>
+</li>
+</ul>
+</div>
+<div class="everyonelovesstackoverflow everyoneloves__top-sidebar" id="dfp-tsb"></div>
+<div id="hireme"></div>
+<script>;try{(function(a){function b(a){return'string'==typeof a?document.getElementById(a):a}function c(a){return a=b(a),!!a&&'none'===getComputedStyle(a).display}function d(a){return!c(a)}function e(a){return!!a}function f(a){return /^\s*$/.test(b(a).innerHTML)}function g(a){var b=a.style;b.height=b.maxHeight=b.minHeight='auto',b.display='none',[].forEach.call(a.children,g)}function h(a,b){var c;return function(){return a&&(c=a.call(b||this,arguments),a=null),c}}function i(a){var b=document.createElement('script');b.src=a,document.body.appendChild(b)}function j(a){return k([],a)}function k(a,b){return a.push=function(a){return b(),delete this.push,this.push(a)},a}function l(){try{return!new Function('return async()=>{};')}catch(a){return!0}}function m(){return'undefined'!=typeof googletag&&!!googletag.apiReady}function n(){m()||(googletag={cmd:j(A)})}function o(){var a=document.createElement('div');a.className='adsbox',a.id='clc-abd',a.style.position='absolute',a.style.pointerEvents='none',a.innerHTML='&nbsp;',document.body.appendChild(a)}function p(a){var b=a.serviceName,c=a.slot,d=a.lineItemId;try{var e=c.getSlotElementId(),f=[];e||f.push('id=0');var h=document.getElementById(e);if(!e||h?h.hasAttribute('data-clc-stalled')&&f.push('st=1'):f.push('el=0'),0!==f.length)return void B(f.join('&'));-1===x.dh.indexOf(d)?h.setAttribute('data-clc-prefilled','true'):g(h),h.setAttribute('data-clc-ready','true')}catch(a){var i=document.querySelector('#dfp-tsb, #dfp-isb, #clc-tsb');i&&i.setAttribute('data-clc-ready','true'),B('e=1')}}function q(){return Object.keys(F.ids)}function r(a){var b=F.ids[a],c=F.slots[b];'function'==typeof c&&(c=c(a));return{path:'/'+C+'/'+E+'/'+b+'/'+D,sizes:c,zone:b}}function s(a){return!(clc.collapse&&void 0!==clc.collapse[a])||!!clc.collapse[a]}function t(a,b){'dfp-isb'===a&&b.setTargeting('Sidebar',['Inline']),'dfp-tsb'===a&&b.setTargeting('Sidebar',['Right']);var c=r(a),d=c.path,e=c.sizes,f=c.zone,g=googletag.defineSlot(d,e,a);s(f)&&g.setCollapseEmptyDiv(!0,!0),g.addService(b),!1}function u(b){var c=a.dfp&&a.dfp.targeting||{};Object.keys(c).forEach(function(a){b.setTargeting(a,c[a])})}function v(a){var g=a.map(b).filter(e);return{eligible:g.filter(f).filter(d).map(function(a){return a.id}),ineligible:g.filter(c)}}function w(b){if(void 0===b&&(b=q()),!m())return n(),void googletag.cmd.push(function(){return w(b)});var c=v(b),d=c.eligible,e=c.ineligible;if(e.forEach(g),0!==d.length){o(),googletag.destroySlots();var f=googletag.pubads();f.enableSingleRequest(),a.sreEvent||(f.addEventListener('slotRenderEnded',p),a.sreEvent=!0),u(f),d.forEach(function(a){return t(a,f)}),googletag.enableServices(),d.forEach(function(a){googletag.display(a)})}}var x=function(a){for(var b=[],c=1;c<arguments.length;c++)b[c-1]=arguments[c];for(var d,e=0,f=b;e<f.length;e++)for(var g in d=f[e],d)a[g]=d[g];return a}({"lib":"https://cdn.sstatic.net/clc/clc.min.js?v=d5e853c48d84","style":"https://cdn.sstatic.net/clc/styles/clc.min.css?v=002bd589ccb2","u":"https://clc.stackoverflow.com/markup.js","wa":true,"kt":2000,"tto":true,"h":"clc.stackoverflow.com","allowed":"^(((talent\\.)?stackoverflow)|(blog\\.codinghorror)|(serverfault|askubuntu)|([^\\.]+\\.stackexchange))\\.com$","wv":true,"al":false,"dh":[4385506061,4386578282,4386579572]},a.options||{}),y=h(function(){var a=x.lib;l()&&(a=a.replace(/(\.min)?\.js(\?v=[0-9a-fA-F]+)?$/,'.ie$1.js$2')),i(a)}),z=a.cmd||[];Array.isArray(z)&&(0<z.length?y():k(z,y));var A=h(function(){i('https://www.googletagservices.com/tag/js/gpt.js')}),B=function(a){new Image().src='https://'+x.h+'/stalled.gif?'+a},C='248424177',D=/^\/tags\//.test(location.pathname)||/^\/questions\/tagged\//.test(location.pathname)?'tag-pages':/^\/$/.test(location.pathname)||/^\/home/.test(location.pathname)?'home-page':'question-pages',E=location.hostname;var F={slots:{lb:[[728,90]],mlb:[[728,90]],smlb:[[728,90]],bmlb:[[728,90]],sb:function(a){return'dfp-tsb'===a?[[300,250],[300,600]]:[[300,250]]},"tag-sponsorship":[[730,135]],"mobile-below-question":[[320,50],[300,250]]},ids:{"dfp-tlb":'lb',"dfp-mlb":'mlb',"dfp-smlb":'smlb',"dfp-bmlb":'bmlb',"dfp-tsb":'sb',"dfp-isb":'sb',"dfp-tag":'tag-sponsorship',"dfp-m-aq":'mobile-below-question',"clc-tlb":'lb',"clc-mlb":'mlb',"clc-tsb":'sb'}};(function(){var b=x.al;b&&z.push(function(){return a.load()})})(),n(),a.dfp={load:w},a.options=x,a.cmd=z})(this.clc=this.clc||{})}catch(a){window.console.error(a)}</script> <script>
+                var clc = clc || {};
+                clc.collapse = { sb: !0,'tag-sponsorship':!0,lb:!1,mlb:!1,smlb:!1,bmlb:!1,'mobile-below-question':!0};
+                clc.cmd = clc.cmd || [];
+                clc.cmd.push(function () { window.clc_request='AlixBjot4NYIAAAAAMoXQwMCAAAAAgAAAAAkAAAAfHB5dGhvbnx1cmxsaWJ8aHR0cC1zdGF0dXMtY29kZS00Mjl8ADNap_yaIfgf3EU'; clc.load(); });
+                                clc.dfp = clc.dfp || {};
+                clc.dfp.targeting = {Registered:['false'],'so-tag':['python','urllib','http-status-code-429']};
+                
+                var googletag = googletag || {};
+                googletag.cmd = googletag.cmd || [];
+                googletag.cmd.push(function () { clc.dfp.load(); });
+            </script>
+<div class="module sidebar-linked">
+<h4 id="h-linked">Linked</h4>
+<div class="linked" data-tracker="lq=1">
+<div class="spacer">
+<a href="/q/13213048" title="Vote score (upvotes - downvotes)">
+<div class="answer-votes answered-accepted default">9</div>
+</a>
+<a class="question-hyperlink" href="/questions/13213048/urllib2-http-error-429?noredirect=1">urllib2 HTTP error 429</a>
+</div> </div>
+</div>
+<div class="module sidebar-related">
+<h4 id="h-related">Related</h4>
+<div class="related js-gps-related-questions" data-tracker="rq=1">
+<div class="spacer"><a href="/q/2018026" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted large">626</div></a><a class="question-hyperlink" href="/questions/2018026/what-are-the-differences-between-the-urllib-urllib2-and-requests-module">What are the differences between the urllib, urllib2, and requests module?</a></div><div class="spacer"><a href="/q/2977850" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">1</div></a><a class="question-hyperlink" href="/questions/2977850/im-getting-an-error-when-trying-to-open-a-website-url-with-python-3-1-urllib">I'm getting an error when trying to open a website url with Python 3.1, urllib &amp; json: operation was attempted on something that is not a socket</a></div><div class="spacer"><a href="/q/38508715" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">1</div></a><a class="question-hyperlink" href="/questions/38508715/python-download-images-with-alernating-variables">Python download images with alernating variables</a></div><div class="spacer"><a href="/q/41214965" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted default">2</div></a><a class="question-hyperlink" href="/questions/41214965/python-3-5-urllib-request-403-forbidden-error">Python 3.5 urllib.request 403 Forbidden Error</a></div><div class="spacer"><a href="/q/45266199" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted default">0</div></a><a class="question-hyperlink" href="/questions/45266199/python-3-urllib-http-error-412-precondition-failed">Python 3 urllib HTTP Error 412: Precondition Failed</a></div><div class="spacer"><a href="/q/47978719" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted default">1</div></a><a class="question-hyperlink" href="/questions/47978719/urllib-not-working-with-api-request">urllib not working with api request</a></div><div class="spacer"><a href="/q/49035274" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted default">0</div></a><a class="question-hyperlink" href="/questions/49035274/http-error-404-not-found-python-urllib">HTTP Error 404: Not Found python urllib</a></div><div class="spacer"><a href="/q/51968603" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted default">3</div></a><a class="question-hyperlink" href="/questions/51968603/using-the-re-and-urllib-request-module">using the re and urllib.request module</a></div><div class="spacer"><a href="/q/53423216" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">0</div></a><a class="question-hyperlink" href="/questions/53423216/how-can-i-use-python3-for-profantiy-editor-mini-project">How can I use python3 for profantiy editor mini project?</a></div><div class="spacer"><a href="/q/53679023" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">0</div></a><a class="question-hyperlink" href="/questions/53679023/i-use-asynchronous-and-requests-and-urllib-are-blocking">I use asynchronous and requests and urllib are blocking</a></div>
+</div>
+</div>
+<div class="module tex2jax_ignore" id="hot-network-questions">
+<h4>
+<a class="js-gps-track s-link s-link__inherit" data-gps-track="posts_hot_network.click({ item_type:1, location:11 })" href="https://stackexchange.com/questions?tab=hot">
+            Hot Network Questions
+        </a>
+</h4>
+<ul>
+<li>
+<div class="favicon favicon-english" title="English Language &amp; Usage Stack Exchange"></div><a class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:97 }); posts_hot_network.click({ item_type:2, location:11 })" href="https://english.stackexchange.com/questions/499382/what-was-the-idiom-for-something-that-we-take-without-a-doubt">
+                    What was the idiom for something that we take without a doubt?
+                </a>
+</li>
+<li>
+<div class="favicon favicon-puzzling" title="Puzzling Stack Exchange"></div><a class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:559 }); posts_hot_network.click({ item_type:2, location:11 })" href="https://puzzling.stackexchange.com/questions/84272/pirate-democracy-at-its-finest">
+                    Pirate democracy at its finest
+                </a>
+</li>
+<li>
+<div class="favicon favicon-rpg" title="Role-playing Games Stack Exchange"></div><a class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:122 }); posts_hot_network.click({ item_type:2, location:11 })" href="https://rpg.stackexchange.com/questions/148453/my-players-want-to-grind-xp-but-were-using-milestone-advancement">
+                    My players want to grind XP but we're using milestone advancement
+                </a>
+</li>
+<li>
+<div class="favicon favicon-mathematica" title="Mathematica Stack Exchange"></div><a class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:387 }); posts_hot_network.click({ item_type:2, location:11 })" href="https://mathematica.stackexchange.com/questions/198926/nintegrate-doesnt-evaluate">
+                    NIntegrate doesn't evaluate
+                </a>
+</li>
+<li>
+<div class="favicon favicon-scifi" title="Science Fiction &amp; Fantasy Stack Exchange"></div><a class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:186 }); posts_hot_network.click({ item_type:2, location:11 })" href="https://scifi.stackexchange.com/questions/213170/why-does-mjolnir-fall-down-in-age-of-ultron-but-not-in-endgame">
+                    Why does Mjolnir fall down in Age of Ultron but not in Endgame?
+                </a>
+</li>
+<li class="dno js-hidden">
+<div class="favicon favicon-politics" title="Politics Stack Exchange"></div><a class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:475 }); posts_hot_network.click({ item_type:2, location:11 })" href="https://politics.stackexchange.com/questions/41569/why-did-theresa-may-offer-a-vote-on-a-second-brexit-referendum">
+                    Why did Theresa May offer a vote on a second Brexit referendum?
+                </a>
+</li>
+<li class="dno js-hidden">
+<div class="favicon favicon-electronics" title="Electrical Engineering Stack Exchange"></div><a class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:135 }); posts_hot_network.click({ item_type:2, location:11 })" href="https://electronics.stackexchange.com/questions/439756/why-are-gnd-pads-often-only-connected-by-four-traces">
+                    Why are GND pads often only connected by four traces?
+                </a>
+</li>
+<li class="dno js-hidden">
+<div class="favicon favicon-biology" title="Biology Stack Exchange"></div><a class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:375 }); posts_hot_network.click({ item_type:2, location:11 })" href="https://biology.stackexchange.com/questions/84525/can-a-person-survive-on-blood-in-place-of-water">
+                    Can a person survive on blood in place of water?
+                </a>
+</li>
+<li class="dno js-hidden">
+<div class="favicon favicon-worldbuilding" title="Worldbuilding Stack Exchange"></div><a class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:579 }); posts_hot_network.click({ item_type:2, location:11 })" href="https://worldbuilding.stackexchange.com/questions/147578/a-steel-cutting-sword">
+                    A steel cutting sword?
+                </a>
+</li>
+<li class="dno js-hidden">
+<div class="favicon favicon-unix" title="Unix &amp; Linux Stack Exchange"></div><a class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:106 }); posts_hot_network.click({ item_type:2, location:11 })" href="https://unix.stackexchange.com/questions/520630/first-match-awk">
+                    First Match - awk
+                </a>
+</li>
+<li class="dno js-hidden">
+<div class="favicon favicon-astronomy" title="Astronomy Stack Exchange"></div><a class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:514 }); posts_hot_network.click({ item_type:2, location:11 })" href="https://astronomy.stackexchange.com/questions/31989/are-black-holes-spherical-during-merger">
+                    Are black holes spherical during merger?
+                </a>
+</li>
+<li class="dno js-hidden">
+<div class="favicon favicon-mathoverflow" title="MathOverflow"></div><a class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:504 }); posts_hot_network.click({ item_type:2, location:11 })" href="https://mathoverflow.net/questions/332247/defining-the-standard-model-of-pa-so-that-a-space-alien-could-understand">
+                    Defining the standard model of PA so that a space alien could understand
+                </a>
+</li>
+<li class="dno js-hidden">
+<div class="favicon favicon-retrocomputing" title="Retrocomputing Stack Exchange"></div><a class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:648 }); posts_hot_network.click({ item_type:2, location:11 })" href="https://retrocomputing.stackexchange.com/questions/11072/can-my-floppy-disk-still-work-without-a-shutter-spring">
+                    Can my floppy disk still work without a shutter spring?
+                </a>
+</li>
+<li class="dno js-hidden">
+<div class="favicon favicon-skeptics" title="Skeptics Stack Exchange"></div><a class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:212 }); posts_hot_network.click({ item_type:2, location:11 })" href="https://skeptics.stackexchange.com/questions/44081/have-1-5-of-all-nuclear-reactors-ever-built-melted-down">
+                    Have 1.5% of all nuclear reactors ever built melted down?
+                </a>
+</li>
+<li class="dno js-hidden">
+<div class="favicon favicon-stackoverflow" title="Stack Overflow"></div><a class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:1 }); posts_hot_network.click({ item_type:2, location:11 })" href="https://stackoverflow.com/questions/56264674/why-does-this-if-statement-combining-assignment-and-an-equality-check-return-tru">
+                    Why does this if-statement combining assignment and an equality check return true?
+                </a>
+</li>
+<li class="dno js-hidden">
+<div class="favicon favicon-codereview" title="Code Review Stack Exchange"></div><a class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:196 }); posts_hot_network.click({ item_type:2, location:11 })" href="https://codereview.stackexchange.com/questions/220824/count-even-digits-in-number">
+                    Count Even Digits In Number
+                </a>
+</li>
+<li class="dno js-hidden">
+<div class="favicon favicon-askubuntu" title="Ask Ubuntu"></div><a class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:89 }); posts_hot_network.click({ item_type:2, location:11 })" href="https://askubuntu.com/questions/1145649/apt-strange-requests-to-d16r8ew072anqo-cloudfront-net80">
+                    Apt - strange requests to d16r8ew072anqo.cloudfront.net:80
+                </a>
+</li>
+<li class="dno js-hidden">
+<div class="favicon favicon-dba" title="Database Administrators Stack Exchange"></div><a class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:182 }); posts_hot_network.click({ item_type:2, location:11 })" href="https://dba.stackexchange.com/questions/238927/access-to-the-path-c-some-path-is-denied-for-mssql-clr">
+                    Access to the path 'c:\some\path' is denied for MSSQL CLR
+                </a>
+</li>
+<li class="dno js-hidden">
+<div class="favicon favicon-academia" title="Academia Stack Exchange"></div><a class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:415 }); posts_hot_network.click({ item_type:2, location:11 })" href="https://academia.stackexchange.com/questions/130959/is-it-rude-to-call-a-professor-by-their-last-name-with-no-prefix-in-a-non-academ">
+                    Is it rude to call a professor by their last name with no prefix in a non-academic setting?
+                </a>
+</li>
+<li class="dno js-hidden">
+<div class="favicon favicon-workplace" title="The Workplace Stack Exchange"></div><a class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:423 }); posts_hot_network.click({ item_type:2, location:11 })" href="https://workplace.stackexchange.com/questions/137037/can-i-tell-a-prospective-employee-that-everyone-in-the-team-is-leaving">
+                    Can I tell a prospective employee that everyone in the team is leaving?
+                </a>
+</li>
+<li class="dno js-hidden">
+<div class="favicon favicon-movies" title="Movies &amp; TV Stack Exchange"></div><a class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:367 }); posts_hot_network.click({ item_type:2, location:11 })" href="https://movies.stackexchange.com/questions/101053/did-this-character-show-any-indication-of-wanting-to-rule-before-s8e6">
+                    Did this character show any indication of wanting to rule before S8E6?
+                </a>
+</li>
+<li class="dno js-hidden">
+<div class="favicon favicon-worldbuilding" title="Worldbuilding Stack Exchange"></div><a class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:579 }); posts_hot_network.click({ item_type:2, location:11 })" href="https://worldbuilding.stackexchange.com/questions/147616/could-a-19-25mm-revolver-actually-exist">
+                    Could a 19.25mm revolver actually exist?
+                </a>
+</li>
+<li class="dno js-hidden">
+<div class="favicon favicon-diy" title="Home Improvement Stack Exchange"></div><a class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:73 }); posts_hot_network.click({ item_type:2, location:11 })" href="https://diy.stackexchange.com/questions/165614/need-to-understand-my-home-electrical-meter-to-see-why-bill-is-so-high-and-or-if">
+                    Need to understand my home electrical meter to see why bill is so high and/or if neighbor is on same meter
+                </a>
+</li>
+<li class="dno js-hidden">
+<div class="favicon favicon-tex" title="TeX - LaTeX Stack Exchange"></div><a class="js-gps-track question-hyperlink mb0" data-gps-track="site.switch({ item_type:11, target_site:85 }); posts_hot_network.click({ item_type:2, location:11 })" href="https://tex.stackexchange.com/questions/492367/does-expl3-have-alternative-to-settowidth-and-settoheight">
+                    Does expl3 have alternative to \settowidth and \settoheight?
+                </a>
+</li>
+</ul>
+<a class="show-more js-show-more js-gps-track" data-gps-track="posts_hot_network.click({ item_type:3, location:11 })" href="#">
+            more hot questions
+        </a>
+</div>
+<div id="feed-link">
+<a href="/feeds/question/54728650" title="feed of this question and its answers">
+<svg aria-hidden="true" class="svg-icon fc-orange-400 iconRss" height="18" viewbox="0 0 18 18" width="18"><path d="M1 3c0-1.1.9-2 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V3zm14.5 12C15.5 8.1 9.9 2.5 3 2.5V5a10 10 0 0 1 10 10h2.5zm-5 0A7.5 7.5 0 0 0 3 7.5V10a5 5 0 0 1 5 5h2.5zm-5 0A2.5 2.5 0 0 0 3 12.5V15h2.5z"></path></svg>
+        question feed
+    </a>
+</div>
+</div>
+</div>
+<script>StackExchange.ready(function(){$.get('/posts/54728650/ivc/4aed');});</script>
+<noscript><div><img alt="" class="dno" height="0" src="/posts/54728650/ivc/4aed" width="0"/></div></noscript><div id="prettify-lang" style="display:none">lang-py</div></div>
+</div>
+</div>
+<footer class="site-footer js-footer" id="footer" role="contentinfo">
+<div class="site-footer--container">
+<div class="site-footer--logo">
+<a href="https://stackoverflow.com"><svg aria-hidden="true" class="svg-icon native iconLogoGlyphMd" height="37" viewbox="0 0 32 37" width="32"><path d="M26 33v-9h4v13H0V24h4v9h22z" fill="#BCBBBB"></path><path d="M21.5 0l-2.7 2 9.9 13.3 2.7-2L21.5 0zM26 18.4L13.3 7.8l2.1-2.5 12.7 10.6-2.1 2.5zM9.1 15.2l15 7 1.4-3-15-7-1.4 3zm14 10.79l.68-2.95-16.1-3.35L7 23l16.1 2.99zM23 30H7v-3h16v3z" fill="#F48024"></path></svg></a>
+</div>
+<nav class="site-footer--nav">
+<div class="site-footer--col site-footer--col__visible js-footer-col" data-name="default">
+<h5 class="-title"><a class="js-gps-track" data-gps-track="footer.click({ location: 2, link: 15})" href="https://stackoverflow.com">Stack Overflow</a></h5>
+<ul class="-list js-primary-footer-links">
+<li class="-item"><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 16})" href="/questions">Questions</a></li>
+<li class="-item"><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 17})" href="https://stackoverflow.com/jobs">Jobs</a></li>
+<li class="-item"><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 11})" href="https://stackoverflow.com/jobs/directory/developer-jobs">Developer Jobs Directory</a></li>
+<li class="-item"><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 28})" href="https://stackoverflow.com/jobs/salary">Salary Calculator</a></li>
+<li class="-item"><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 3 })" href="/help">Help</a></li>
+<li class="-item"><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 12 })" onclick='StackExchange.switchMobile("on")'>Mobile</a></li>
+</ul>
+</div>
+<div class="site-footer--col site-footer--col__visible js-footer-col" data-name="default">
+<h5 class="-title"><a class="js-gps-track" data-gps-track="footer.click({ location: 2, link: 19 })" href="https://www.stackoverflowbusiness.com">Products</a></h5>
+<ul class="-list">
+<li class="-item"><a class="js-gps-track -link" data-ga='["teams traffic","footer - site nav","stackoverflow.com/teams",null,{"dimension4":"teams"}]' data-gps-track="footer.click({ location: 2, link: 29 })" href="https://stackoverflow.com/teams">Teams</a></li>
+<li class="-item"><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 20 })" href="https://www.stackoverflowbusiness.com/talent">Talent</a></li>
+<li class="-item"><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 21 })" href="https://www.stackoverflowbusiness.com/advertising">Advertising</a></li>
+<li class="-item"><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 22 })" href="https://stackoverflow.com/enterprise">Enterprise</a></li>
+</ul>
+</div>
+<div class="site-footer--col site-footer--col__visible js-footer-col" data-name="default">
+<h5 class="-title"><a class="js-gps-track" data-gps-track="footer.click({ location: 2, link: 1 })" href="https://stackoverflow.com/company/about">Company</a></h5>
+<ul class="-list">
+<li class="-item"><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 1 })" href="https://stackoverflow.com/company/about">About</a></li>
+<li class="-item"><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 27 })" href="https://stackoverflow.com/company/press">Press</a></li>
+<li class="-item"><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 9 })" href="https://stackoverflow.com/company/work-here">Work Here</a></li>
+<li class="-item"><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 7 })" href="https://stackoverflow.com/legal">Legal</a></li>
+<li class="-item"><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 8 })" href="https://stackoverflow.com/legal/privacy-policy">Privacy Policy</a></li>
+<li class="-item"><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 13 })" href="https://stackoverflow.com/company/contact">Contact Us</a></li>
+</ul>
+</div>
+<div class="site-footer--col site-footer--categories-nav site-footer--col__visible">
+<a class="site-footer--back js-footer-back" href="#"><svg aria-hidden="true" class="svg-icon iconArrowLeftAlt" height="18" viewbox="0 0 18 18" width="18"><path d="M10.58 16L12 14.59 6.4 9 12 3.41 10.57 2l-7 7 7 7z"></path></svg></a>
+<div>
+<h5 class="-title"><a href="https://stackexchange.com">Stack Exchange<br/> Network</a></h5>
+<ul class="-list">
+<li class="-item"><a class="-link _expandable js-footer-category-trigger js-gps-track" data-gps-track="footer.click({ location: 2, link: 24 })" data-target="Technology" href="#">Technology</a></li>
+<li class="-item"><a class="-link _expandable js-footer-category-trigger js-gps-track" data-gps-track="footer.click({ location: 2, link: 24 })" data-target="Life / Arts" href="#">Life / Arts</a></li>
+<li class="-item"><a class="-link _expandable js-footer-category-trigger js-gps-track" data-gps-track="footer.click({ location: 2, link: 24 })" data-target="Culture / Recreation" href="#">Culture / Recreation</a></li>
+<li class="-item"><a class="-link _expandable js-footer-category-trigger js-gps-track" data-gps-track="footer.click({ location: 2, link: 24 })" data-target="Science" href="#">Science</a></li>
+<li class="-item"><a class="-link _expandable js-footer-category-trigger js-gps-track" data-gps-track="footer.click({ location: 2, link: 24 })" data-target="Other" href="#">Other</a></li>
+</ul>
+</div>
+</div>
+<div class="site-footer--categories">
+<div class="site-footer--col site-footer--category js-footer-col" data-name="Technology">
+<ul class="-list">
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://stackoverflow.com" title="professional and enthusiast programmers">Stack Overflow</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://serverfault.com" title="system and network administrators">Server Fault</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://superuser.com" title="computer enthusiasts and power users">Super User</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://webapps.stackexchange.com" title="power users of web applications">Web Applications</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://askubuntu.com" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://webmasters.stackexchange.com" title="pro webmasters">Webmasters</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://gamedev.stackexchange.com" title="professional and independent game developers">Game Development</a></li>
+</ul></div><div class="site-footer--col site-footer--category js-footer-col" data-name="Technology"><ul class="-list">
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://tex.stackexchange.com" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://softwareengineering.stackexchange.com" title="professionals, academics, and students working within the systems development life cycle">Software Engineering</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://unix.stackexchange.com" title="users of Linux, FreeBSD and other Un*x-like operating systems">Unix &amp; Linux</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://apple.stackexchange.com" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://wordpress.stackexchange.com" title="WordPress developers and administrators">WordPress Development</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://gis.stackexchange.com" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://electronics.stackexchange.com" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+</ul></div><div class="site-footer--col site-footer--category js-footer-col" data-name="Technology"><ul class="-list">
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://android.stackexchange.com" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://security.stackexchange.com" title="information security professionals">Information Security</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://dba.stackexchange.com" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://drupal.stackexchange.com" title="Drupal developers and administrators">Drupal Answers</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://sharepoint.stackexchange.com" title="SharePoint enthusiasts">SharePoint</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://ux.stackexchange.com" title="user experience researchers and experts">User Experience</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://mathematica.stackexchange.com" title="users of Wolfram Mathematica">Mathematica</a></li>
+</ul></div><div class="site-footer--col site-footer--category js-footer-col" data-name="Technology"><ul class="-list">
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://salesforce.stackexchange.com" title="Salesforce administrators, implementation experts, developers and anybody in-between">Salesforce</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://expressionengine.stackexchange.com" title="administrators, end users, developers and designers for ExpressionEngine® CMS">ExpressionEngine® Answers</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://pt.stackoverflow.com" title="programadores profissionais e entusiastas">Stack Overflow em Português</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://blender.stackexchange.com" title="people who use Blender to create 3D graphics, animations, or games">Blender</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://networkengineering.stackexchange.com" title="network engineers">Network Engineering</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://crypto.stackexchange.com" title="software developers, mathematicians and others interested in cryptography">Cryptography</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://codereview.stackexchange.com" title="peer programmer code reviews">Code Review</a></li>
+</ul></div><div class="site-footer--col site-footer--category js-footer-col" data-name="Technology"><ul class="-list">
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://magento.stackexchange.com" title="users of the Magento e-Commerce platform">Magento</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://softwarerecs.stackexchange.com" title="people seeking specific software recommendations">Software Recommendations</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://dsp.stackexchange.com" title="practitioners of the art and science of signal, image and video processing">Signal Processing</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://emacs.stackexchange.com" title="those using, extending or developing Emacs">Emacs</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://raspberrypi.stackexchange.com" title="users and developers of hardware and software for Raspberry Pi">Raspberry Pi</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://ru.stackoverflow.com" title="программистов">Stack Overflow на русском</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://codegolf.stackexchange.com" title="programming puzzle enthusiasts and code golfers">Programming Puzzles &amp; Code Golf</a></li>
+</ul></div><div class="site-footer--col site-footer--category js-footer-col" data-name="Technology"><ul class="-list">
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://es.stackoverflow.com" title="programadores y profesionales de la informática">Stack Overflow en español</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://ethereum.stackexchange.com" title="users of Ethereum, the decentralized application platform and smart contract enabled blockchain">Ethereum</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://datascience.stackexchange.com" title="Data science professionals, Machine Learning specialists, and those interested in learning more about the field">Data Science</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://arduino.stackexchange.com" title="developers of open-source hardware and software that is compatible with Arduino">Arduino</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://bitcoin.stackexchange.com" title="Bitcoin crypto-currency enthusiasts">Bitcoin</a></li>
+<li class="-item">
+<a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 26 })" href="https://stackexchange.com/sites#technology">
+<strong>
+                            more (31)
+                        </strong>
+</a>
+</li>
+</ul>
+</div>
+<div class="site-footer--col site-footer--category js-footer-col" data-name="Life / Arts">
+<ul class="-list">
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://photo.stackexchange.com" title="professional, enthusiast and amateur photographers">Photography</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://scifi.stackexchange.com" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://graphicdesign.stackexchange.com" title="Graphic Design professionals, students, and enthusiasts">Graphic Design</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://movies.stackexchange.com" title="movie and tv enthusiasts">Movies &amp; TV</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://music.stackexchange.com" title="musicians, students, and enthusiasts">Music: Practice &amp; Theory</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://worldbuilding.stackexchange.com" title="writers/artists using science, geography and culture to construct imaginary worlds and settings">Worldbuilding</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://cooking.stackexchange.com" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+</ul></div><div class="site-footer--col site-footer--category js-footer-col" data-name="Life / Arts"><ul class="-list">
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://diy.stackexchange.com" title="contractors and serious DIYers">Home Improvement</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://money.stackexchange.com" title="people who want to be financially literate">Personal Finance &amp; Money</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://academia.stackexchange.com" title="academics and those enrolled in higher education">Academia</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://law.stackexchange.com" title="legal professionals, students, and others with experience or interest in law">Law</a></li>
+<li class="-item">
+<a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 26 })" href="https://stackexchange.com/sites#lifearts">
+<strong>
+                            more (15)
+                        </strong>
+</a>
+</li>
+</ul>
+</div>
+<div class="site-footer--col site-footer--category js-footer-col" data-name="Culture / Recreation">
+<ul class="-list">
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://english.stackexchange.com" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://skeptics.stackexchange.com" title="scientific skepticism">Skeptics</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://judaism.stackexchange.com" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://travel.stackexchange.com" title="road warriors and seasoned travelers">Travel</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://christianity.stackexchange.com" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://ell.stackexchange.com" title="speakers of other languages learning English">English Language Learners</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://japanese.stackexchange.com" title="students, teachers, and linguists wanting to discuss the finer points of the Japanese language">Japanese Language</a></li>
+</ul></div><div class="site-footer--col site-footer--category js-footer-col" data-name="Culture / Recreation"><ul class="-list">
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://gaming.stackexchange.com" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://bicycles.stackexchange.com" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://rpg.stackexchange.com" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://anime.stackexchange.com" title="anime and manga fans">Anime &amp; Manga</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://puzzling.stackexchange.com" title="those who create, solve, and study puzzles">Puzzling</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://mechanics.stackexchange.com" title="mechanics and DIY enthusiast owners of cars, trucks, and motorcycles">Motor Vehicle Maintenance &amp; Repair</a></li>
+<li class="-item">
+<a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 26 })" href="https://stackexchange.com/sites#culturerecreation">
+<strong>
+                            more (33)
+                        </strong>
+</a>
+</li>
+</ul>
+</div>
+<div class="site-footer--col site-footer--category js-footer-col" data-name="Science">
+<ul class="-list">
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://mathoverflow.net" title="professional mathematicians">MathOverflow</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://math.stackexchange.com" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://stats.stackexchange.com" title="people interested in statistics, machine learning, data analysis, data mining, and data visualization">Cross Validated (stats)</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://cstheory.stackexchange.com" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://physics.stackexchange.com" title="active researchers, academics and students of physics">Physics</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://chemistry.stackexchange.com" title="scientists, academics, teachers, and students in the field of chemistry">Chemistry</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://biology.stackexchange.com" title="biology researchers, academics, and students">Biology</a></li>
+</ul></div><div class="site-footer--col site-footer--category js-footer-col" data-name="Science"><ul class="-list">
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://cs.stackexchange.com" title="students, researchers and practitioners of computer science">Computer Science</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://philosophy.stackexchange.com" title="those interested in the study of the fundamental nature of knowledge, reality, and existence">Philosophy</a></li>
+<li class="-item">
+<a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 26 })" href="https://stackexchange.com/sites#science">
+<strong>
+                            more (10)
+                        </strong>
+</a>
+</li>
+</ul>
+</div>
+<div class="site-footer--col site-footer--category js-footer-col" data-name="Other">
+<ul class="-list">
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://meta.stackexchange.com" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Exchange</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://stackapps.com" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://api.stackexchange.com" title="programmatic interaction with Stack Exchange sites">API</a></li>
+<li class="-item"><a class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" href="https://data.stackexchange.com" title="querying Stack Exchange data using SQL">Data</a></li>
+</ul>
+</div>
+</div>
+</nav>
+<div class="site-footer--copyright fs-fine">
+<ul class="-list">
+<li class="-item"><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link:4 })" href="https://stackoverflow.blog?blb=1">Blog</a></li>
+<li class="-item"><a class="-link" href="https://www.facebook.com/officialstackoverflow/">Facebook</a></li>
+<li class="-item"><a class="-link" href="https://twitter.com/stackoverflow">Twitter</a></li>
+<li class="-item"><a class="-link" href="https://linkedin.com/company/stack-overflow">LinkedIn</a></li>
+</ul>
+<p class="mt-auto mb24">
+site design / logo © 2019 Stack Exchange Inc; user contributions licensed under <a href="https://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc by-sa 3.0</a>
+                            with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" rel="license">attribution required</a>.
+                    <span id="svnrev">rev 2019.5.24.33809</span>
+</p>
+</div>
+</div>
+</footer>
+<script>StackExchange.ready(function () { StackExchange.responsiveness.addSwitcher(); })</script>
+<noscript>
+<div id="noscript-warning">Stack Overflow works best with JavaScript enabled
+            <img alt="" class="dno" src="https://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif"/>
+</div>
+</noscript>
+<script>
+            (function(i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function() { (i[r].q = i[r].q || []).push(arguments) }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m);
+            })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+            StackExchange.ready(function () {
+
+                StackExchange.ga.init({
+                    sendTitles: true,
+                    tracker: window.ga,
+                    trackingCodes: [
+                        'UA-108242619-1'
+                    ]
+                });
+
+
+
+                    StackExchange.ga.setDimension('dimension2', '|python|urllib|http-status-code-429|');
+
+                    StackExchange.ga.setDimension('dimension3', 'Questions/Show');
+
+
+                StackExchange.ga.trackPageView();
+            });
+            
+/**/
+            
+            var _qevents = _qevents || [],
+            _comscore = _comscore || [];
+            (function() {
+                var ssl = 'https:' == document.location.protocol,
+                    s = document.getElementsByTagName('script')[0],
+                    qc = document.createElement('script');
+                 qc.async = true;
+                    qc.src = (ssl ? 'https://secure' : 'http://edge') + '.quantserve.com/quant.js';
+                    s.parentNode.insertBefore(qc, s);
+                    _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+/**/
+                 var sc = document.createElement('script');
+                    sc.async = true;
+                    sc.src = (ssl ? 'https://sb' : 'http://b') + '.scorecardresearch.com/beacon.js';
+                    s.parentNode.insertBefore(sc, s);
+                    _comscore.push({ c1: "2", c2: "17440561" });
+            })();
+            
+
+</script>
+</body>
+</html>
