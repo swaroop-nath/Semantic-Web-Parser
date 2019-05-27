@@ -37,7 +37,7 @@ def findRelevanceExtent(id_class_role):
     return relevance_extent
 
 def featureExtraction(soup):
-    divs = soup.find_all('div')
+    divs = soup.body.find_all('div')
     for div in divs:
         tag_h.append(len(div.find_all('h1')) + len(div.find_all('h2')) + len(div.find_all('h3')) + len(div.find_all('h4')) + len(div.find_all('h5')) + len(div.find_all('h6')))
         tag_p.append(len(div.find_all('p')))
@@ -47,7 +47,8 @@ def featureExtraction(soup):
         text_content = div.text.strip()
         word_list = re.split(regexp, text_content)
         word_count.append(len(word_list))
-        children_ratio.append(len(list(div.children))/(len(text_content)+1))
+        if len(list(div.children)) != 0: children_ratio.append(len(list(div.children))/(len(text_content)+1))
+        else: children_ratio.append('nan')
         if len(div.find_all('main')) > 0:
             tag_main.append('YES')
         else: 
@@ -68,11 +69,18 @@ def formCSVData():
     df.to_excel(writer, sheet_name = 'Sheet1')
     writer.save()
 
+def extractFrom(content):
+    soup_object = BeautifulSoup(content, 'lxml')
+    featureExtraction(soup_object)
+    formCSVData()
+
+
+# Driver Program to test the functions
 # markup = request.urlopen(url)
 # soup_object = BeautifulSoup(markup, 'lxml')
 
-temp_html_source = open('temp_html_source.txt', 'r', encoding='utf8')
-soup_object = BeautifulSoup(temp_html_source.read(), 'lxml')
+# temp_html_source = open('temp_html_source.txt', 'r', encoding='utf8')
+# soup_object = BeautifulSoup(temp_html_source.read(), 'lxml')
 
-featureExtraction(soup_object)
-formCSVData()
+# featureExtraction(soup_object)
+# formCSVData()
