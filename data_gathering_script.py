@@ -1,5 +1,5 @@
 import urllib.request as request
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, NavigableString
 import re
 from pandas import DataFrame, ExcelWriter
 from selenium import webdriver
@@ -57,56 +57,58 @@ def findRelevanceExtent(id_class_role):
     return relevance_extent
 
 def featureExtraction(soup, driver, root_area):
-    divs = soup.body.find_all('div')
-    for div in divs:
-        tag_h.append(len(div.find_all('h1')) + len(div.find_all('h2')) + len(div.find_all('h3')) + len(div.find_all('h4')) + len(div.find_all('h5')) + len(div.find_all('h6')))
-        tag_p.append(len(div.find_all('p')))
-        tag_formatting.append(len(div.find_all('b')) + len(div.find_all('i')) + len(div.find_all('u')) + len(div.find_all('em')) + len(div.find_all('small')) + len(div.find_all('strike')) + len(div.find_all('li')) + len(div.find_all('ul')) + len(div.find_all('ol')))
-        if len(div.find_all('table')) > 0: tag_table.append('YES')
-        else: tag_table.append('NO')
-        text_content = div.text.strip()
-        word_list = re.split(regexp, text_content)
-        word_count.append(len(word_list))
-        if len(list(div.children)) != 0: children_ratio.append(len(list(div.children))/(len(text_content)+1))
-        else: children_ratio.append('nan')
-        if len(div.find_all('main')) > 0:
-            tag_main.append('YES')
-        else: 
-            tag_main.append('NO')
-        if len(div.find_all('article')) > 0: 
-            tag_article.append('YES')
-        else: 
-            tag_article.append('NO')
-        id_class_role = [div.get('id'), div.get('class'), div.get('role')]
-        id_relevance_extent.append(findRelevanceExtent(id_class_role))
-        flag_class = False
-        for x in id_class_role:
-            if not x is None:
-                flag_class = True
-                class_value.append(x)
-                break
-        if not flag_class: class_value.append('nan')
-        x_path_div = xpath_soup(div)
-        element = driver.find_element_by_xpath(x_path_div)
-        coord_x.append(element.location.get('x'))
-        coord_y.append(element.location.get('y'))
-        temp_h = element.size.get('height')
-        temp_w = element.size.get('width')
-        if temp_h is None: height.append('nan')
-        else: height.append(temp_h)
-        if temp_w is None: width.append('nan')
-        else: width.append(temp_w)
-        if temp_h is None or temp_w is None: element_area_ratio.append('0')
-        else: element_area_ratio.append(temp_h*temp_w/root_area)
+    children = soup.body.children
+    children = list(filter(lambda a: a != '\n', children))
+    for div in children:
+        if not isinstance(div, NavigableString):
+            tag_h.append(len(div.find_all('h1')) + len(div.find_all('h2')) + len(div.find_all('h3')) + len(div.find_all('h4')) + len(div.find_all('h5')) + len(div.find_all('h6')))
+            tag_p.append(len(div.find_all('p')))
+            tag_formatting.append(len(div.find_all('b')) + len(div.find_all('i')) + len(div.find_all('u')) + len(div.find_all('em')) + len(div.find_all('small')) + len(div.find_all('strike')) + len(div.find_all('li')) + len(div.find_all('ul')) + len(div.find_all('ol')))
+            if len(div.find_all('table')) > 0: tag_table.append('YES')
+            else: tag_table.append('NO')
+            text_content = div.text.strip()
+            word_list = re.split(regexp, text_content)
+            word_count.append(len(word_list))
+            if len(list(div.children)) != 0: children_ratio.append(len(list(div.children))/(len(text_content)+1))
+            else: children_ratio.append('nan')
+            if len(div.find_all('main')) > 0:
+                tag_main.append('YES')
+            else: 
+                tag_main.append('NO')
+            if len(div.find_all('article')) > 0: 
+                tag_article.append('YES')
+            else: 
+                tag_article.append('NO')
+            id_class_role = [div.get('id'), div.get('class'), div.get('role')]
+            id_relevance_extent.append(findRelevanceExtent(id_class_role))
+            flag_class = False
+            for x in id_class_role:
+                if not x is None:
+                    flag_class = True
+                    class_value.append(x)
+                    break
+            if not flag_class: class_value.append('nan')
+            x_path_div = xpath_soup(div)
+            element = driver.find_element_by_xpath(x_path_div)
+            coord_x.append(element.location.get('x'))
+            coord_y.append(element.location.get('y'))
+            temp_h = element.size.get('height')
+            temp_w = element.size.get('width')
+            if temp_h is None: height.append('nan')
+            else: height.append(temp_h)
+            if temp_w is None: width.append('nan')
+            else: width.append(temp_w)
+            if temp_h is None or temp_w is None: element_area_ratio.append('0')
+            else: element_area_ratio.append(temp_h*temp_w/root_area)
 
         
-def formCSVData():
+def formCSVData(i):
     data = {'tag_h': tag_h,'tag_p': tag_p,'tag_formatting': tag_formatting,'tag_table': tag_table,'word_count': word_count,'children_ratio': children_ratio,'id_relevance_extent': id_relevance_extent,'tag_main': tag_main,'tag_article': tag_article,'x': coord_x,'y': coord_y,'height': height,'width': width,'element_area_ratio': element_area_ratio ,'class_value': class_value}
     # print('tag_h:' + str(len(tag_h)) + ', coord_x: ' + str(len(coord_x)) + ', coord_y: ' + str(len(coord_y)) + ', height: ' + str(len(height)) + ', width: ' + str(len(width)) + ', element_are_ratio: ' + str(len(element_area_ratio)))
     # col_names = ['tag_h1', 'tag_h2', 'tag_h3', 'tag_h4', 'tag_h5', 'tag_h6', 'tag_p', 'tag_b', 'tag_i', 'tag_u', 'tag_em', 'tag_small', 'tag_strike', 'tag_li', 'tag_ol', 'tag_ul', 'tag_table', 'word_count', 'children_ratio', 'id_relevance_extent', 'tag_main', 'tag_article']
     df = DataFrame(data)
-    writer = ExcelWriter('data_gathered_part_5.xlsx', engine = 'xlsxwriter')
-    df.to_excel(writer, sheet_name = 'Sheet1', index = False, header = True)
+    writer = ExcelWriter('data_gathered_part_first_segmentation.xlsx', engine = 'openpyxl')
+    df.to_excel(writer, sheet_name = 'Sheet1', header = True)
     writer.save()
 
 def extractFrom(content, URI):
@@ -114,7 +116,7 @@ def extractFrom(content, URI):
     driver = webdriver.Firefox(executable_path=r'D:\Softwares\Anaconda\Anaconda\geckodriver-v0.24.0-win64\geckodriver.exe')
     # print(URI)
     driver.get(URI)
-    root_x_path = xpath_soup(soup_object.body)
+    root_x_path = xpath_soup(soup_object.html)
     root_element = driver.find_element_by_xpath(root_x_path)
     # print(root_element.size)
     root_area = root_element.size.get('width') * root_element.size.get('height')
