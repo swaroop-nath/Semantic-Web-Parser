@@ -8,7 +8,7 @@ import itertools
 # A tempporary URL to test the working of the feature extraction algorithm
 url = 'https://stackoverflow.com/questions/13336576/extracting-an-information-from-web-page-by-machine-learning'
 
-accepted_content_classifiers = ['content', 'primary', 'body', 'main']
+accepted_content_classifiers = ['content', 'primary', 'body', 'main', 'contain']
 tag_h= []
 tag_p = []
 tag_formatting = []
@@ -45,7 +45,7 @@ def findRelevanceExtent(id_class_role):
     flag_1 = False
     flag_2 = False
     for i in range(3):
-        if not id_class_role[i] is None: ''.join(id_class_role[i])
+        if not id_class_role[i] is None: id_class_role[i] = ''.join(id_class_role[i])
     for content_classifier in accepted_content_classifiers:
         if not id_class_role[0] is None and content_classifier in id_class_role[0]: flag_0 = True
         if not id_class_role[1] is None and content_classifier in id_class_role[1]: flag_1 = True
