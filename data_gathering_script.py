@@ -102,7 +102,7 @@ def featureExtraction(soup, driver, root_area):
             else: element_area_ratio.append(temp_h*temp_w/root_area)
 
         
-def formCSVData(i):
+def formCSVData():
     data = {'tag_h': tag_h,'tag_p': tag_p,'tag_formatting': tag_formatting,'tag_table': tag_table,'word_count': word_count,'children_ratio': children_ratio,'id_relevance_extent': id_relevance_extent,'tag_main': tag_main,'tag_article': tag_article,'x': coord_x,'y': coord_y,'height': height,'width': width,'element_area_ratio': element_area_ratio ,'class_value': class_value}
     # print('tag_h:' + str(len(tag_h)) + ', coord_x: ' + str(len(coord_x)) + ', coord_y: ' + str(len(coord_y)) + ', height: ' + str(len(height)) + ', width: ' + str(len(width)) + ', element_are_ratio: ' + str(len(element_area_ratio)))
     # col_names = ['tag_h1', 'tag_h2', 'tag_h3', 'tag_h4', 'tag_h5', 'tag_h6', 'tag_p', 'tag_b', 'tag_i', 'tag_u', 'tag_em', 'tag_small', 'tag_strike', 'tag_li', 'tag_ol', 'tag_ul', 'tag_table', 'word_count', 'children_ratio', 'id_relevance_extent', 'tag_main', 'tag_article']

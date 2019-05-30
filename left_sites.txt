@@ -1,0 +1,14 @@
+4, 5, 7, 8, 12, 26, 31, 33, 38
+|-----1||--2||--3||--4||-----5|
+
+-----------------------------First Iteration Over----------------------------------
+
+38
+
+Label - {0 - No Section, 1 - Top Content, 2 - Main Content, 3 - Left Content, 4 - Right Content, 5 - Footer Content}
+good sites - w3schools, bu.edu
+
+
+Inferences - 
+1. The main content of a webpage can contain class/id/role value - 'container'.
+2. The main content of a webpage can be inside a <main> tag.
