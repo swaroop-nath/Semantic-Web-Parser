@@ -25,57 +25,52 @@ X[:, 3] = labelEncoderTable.transform(X[:, 3])
 X[:, 8] = labelEncoderTable.transform(X[:, 8])
 X[:, 9] = labelEncoderTable.transform(X[:, 9])
 
-accuracy = []
+sensitivity_knn = []
+sensitivity_svm = []
+sensitivity_dtc = []
+sensitivity_rfc = []
+
 #
-#for i in range(100):
-#    # Splitting the data into train and test set with a 75-25 ratio
-#    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.25)
-#    
-#    # Fitting a K-NN Classifier to the data and observing the results
-#    knn_classifier = knn(X_train, y_train)
-#    y_pred = knn_classifier.predictValues(X_test)
-#    
-#    knnConfusionMatrix = findConfusionMatrix(y_test, y_pred)
-#    accuracy.append(sum(np.diagonal(knnConfusionMatrix))/sum(sum(knnConfusionMatrix)))
+for i in range(100):
+    # Splitting the data into train and test set with a 75-25 ratio
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.25)
+    
+    # Fitting a K-NN Classifier to the data and observing the results
+    knn_classifier = knn(X_train, y_train)
+    y_pred = knn_classifier.predictValues(X_test)
+    
+    knnConfusionMatrix = findConfusionMatrix(y_test, y_pred)
+    sensitivity_knn.append(knnConfusionMatrix[2, 2]/sum(knnConfusionMatrix[2]))
 
 #for i in range(100):
 #    # Splitting the data into train and test set with a 75-25 ratio
 #    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.25)
-#    
-#    # Fitting an SVM Classifier to the data and observing the results
-#    svm_classifier = svm(X_train, y_train)
-#    y_pred = svm_classifier.predictValues(X_test)
-#    
-#    svmConfusionMatrix = findConfusionMatrix(y_test, y_pred)
-#    accuracy.append(sum(np.diagonal(svmConfusionMatrix))/sum(sum(svmConfusionMatrix)))
+    
+    # Fitting an SVM Classifier to the data and observing the results
+    svm_classifier = svm(X_train, y_train)
+    y_pred = svm_classifier.predictValues(X_test)
+    
+    svmConfusionMatrix = findConfusionMatrix(y_test, y_pred)
+    sensitivity_svm.append(svmConfusionMatrix[2, 2]/sum(svmConfusionMatrix[2]))
 
 #for i in range(1):
-## Splitting the data into train and test set with a 75-25 ratio
-#X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.25)
+#   # Splitting the data into train and test set with a 75-25 ratio
+#   X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.25)
 #    
-## Fitting a Decision Tree Classifier to the data and observing the results
-#dtc_classifier = dtc(X_train, y_train)
-#y_pred = dtc_classifier.predictValues(X_test)
-#
-#dtcConfusionMatrix = findConfusionMatrix(y_test, y_pred)
-#accuracy.append((sum(np.diagonal(dtcConfusionMatrix))/sum(sum(dtcConfusionMatrix))))
-#
-#selection = SelectFromModel(dtc_classifier.classifier, threshold = 0.02, prefit = True)
-#X_train_selected = selection.transform(X_train)
-#X_test = selection.transform(X_test)
-#selection_dtc = dtc(X_train_selected, y_train)
-#y_pred_selected = selection_dtc.predictValues(X_test)
-#
-#dtcSelectedConfusionMatrix = findConfusionMatrix(y_test, y_pred_selected)
-#accuracy.append((sum(np.diagonal(dtcSelectedConfusionMatrix))/sum(sum(dtcSelectedConfusionMatrix))))
+   # Fitting a Decision Tree Classifier to the data and observing the results
+    dtc_classifier = dtc(X_train, y_train)
+    y_pred = dtc_classifier.predictValues(X_test)
 
-for i in range(100):
-    # Splitting the data into train and test with a 75-25 ratio
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.25)
+    dtcConfusionMatrix = findConfusionMatrix(y_test, y_pred)
+    sensitivity_dtc.append(dtcConfusionMatrix[2, 2]/sum(dtcConfusionMatrix[2]))
+
+#for i in range(100):
+#    # Splitting the data into train and test with a 75-25 ratio
+#    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.25)
 
     # Fitting a Random Forest Classifier to the data and observing the results
     rfc_classifier = rfc(X_train, y_train)
     y_pred = rfc_classifier.predictValues(X_test)
 
     rfcConfusionMatrix = findConfusionMatrix(y_test, y_pred)
-    accuracy.append(sum(np.diagonal(rfcConfusionMatrix))/sum(sum(rfcConfusionMatrix)))
+    sensitivity_rfc.append(rfcConfusionMatrix[2, 2]/sum(rfcConfusionMatrix[2]))
