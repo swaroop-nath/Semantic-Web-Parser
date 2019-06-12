@@ -58,9 +58,10 @@ def findRelevanceExtent(id_class_role):
     return relevance_extent
 
 def featureExtraction(soup, driver, root_area):
-    children = soup.body.children
-    children = list(filter(lambda a: a != '\n', children))
-    for div in children:
+    children_soup = soup.body.children
+    children_soup = list(filter(lambda a: a != '\n', children_soup))
+    for div in children_soup:
+        # print(type(div))
         if not isinstance(div, NavigableString):
             tag_h.append(len(div.find_all('h1')) + len(div.find_all('h2')) + len(div.find_all('h3')) + len(div.find_all('h4')) + len(div.find_all('h5')) + len(div.find_all('h6')))
             tag_p.append(len(div.find_all('p')))
@@ -104,16 +105,17 @@ def featureExtraction(soup, driver, root_area):
             else: element_area_ratio.append(temp_h*temp_w/root_area)
 
         
-def formCSVData():
+def formCSVData(i):
     data = {'tag_h': tag_h,'tag_p': tag_p,'tag_formatting': tag_formatting,'tag_table': tag_table,'word_count': word_count,'children_ratio': children_ratio,'children': children,'id_relevance_extent': id_relevance_extent,'tag_main': tag_main,'tag_article': tag_article,'x': coord_x,'y': coord_y,'height': height,'width': width,'element_area_ratio': element_area_ratio ,'class_value': class_value}
     # print('tag_h:' + str(len(tag_h)) + ', coord_x: ' + str(len(coord_x)) + ', coord_y: ' + str(len(coord_y)) + ', height: ' + str(len(height)) + ', width: ' + str(len(width)) + ', element_are_ratio: ' + str(len(element_area_ratio)))
     # col_names = ['tag_h1', 'tag_h2', 'tag_h3', 'tag_h4', 'tag_h5', 'tag_h6', 'tag_p', 'tag_b', 'tag_i', 'tag_u', 'tag_em', 'tag_small', 'tag_strike', 'tag_li', 'tag_ol', 'tag_ul', 'tag_table', 'word_count', 'children_ratio', 'id_relevance_extent', 'tag_main', 'tag_article']
     df = DataFrame(data)
-    writer = ExcelWriter('data_gathered_part_first_segmentation.xlsx', engine = 'openpyxl')
+    writer = ExcelWriter('Second Iteration Data\data_gathered_part_first_segmentation_'+str(i)+'.xlsx', engine = 'openpyxl')
+    # writer = ExcelWriter('xyz.xlsx', engine = 'openpyxl')
     df.to_excel(writer, sheet_name = 'Sheet1', header = True)
     writer.save()
 
-def extractFrom(content, URI):
+def extractFrom(content, URI, i):
     soup_object = BeautifulSoup(content, 'lxml')
     driver = webdriver.Firefox(executable_path=r'D:\Softwares\Anaconda\Anaconda\geckodriver-v0.24.0-win64\geckodriver.exe')
     # print(URI)
@@ -125,9 +127,25 @@ def extractFrom(content, URI):
     # print(root_area)
     # print(type(root_area))
     featureExtraction(soup_object, driver, root_area)
-    formCSVData()
+    formCSVData(i)
     driver.quit()
     # root_area = 0
+    tag_h.clear()
+    tag_p.clear()
+    tag_formatting.clear()
+    tag_table.clear()
+    word_count.clear()
+    children_ratio.clear()
+    children.clear()
+    id_relevance_extent.clear()
+    tag_main.clear()
+    tag_article.clear()
+    class_value.clear()
+    coord_x.clear()
+    coord_y.clear()
+    height.clear()
+    width.clear()
+    element_area_ratio.clear()
 
 
 # Driver Program to test the functions
@@ -138,4 +156,4 @@ def extractFrom(content, URI):
 # soup_object = BeautifulSoup(temp_html_source.read(), 'lxml')
 
 # featureExtraction(soup_object)
-# formCSVData()
+# formCSVData().clear()
