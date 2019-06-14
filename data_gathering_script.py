@@ -15,7 +15,7 @@ tag_formatting = []
 tag_table = []  #Boolean Value - Possible values: 'Yes' and 'No'
 word_count = []
 children_ratio = []  #This ratio signifies the sparsity of children tags in the content of an element
-children = []
+# children = []
 id_relevance_extent = []  #Integer Value - Possible Values: 0, 1, 2, 3; this sees if the id/class/role attribute has a value from the accepted words, if it does, then the check is done for how many words from the accepted list match the value
 tag_main = []  #Boolean value - Possible Values: 'Yes' and 'No'
 tag_article = []  #Boolean value - Possible Values: 'Yes' and 'No'
@@ -73,7 +73,7 @@ def featureExtraction(soup, driver, root_area):
             word_count.append(len(word_list))
             if len(list(div.children)) != 0: children_ratio.append(len(list(div.children))/(len(text_content)+1))
             else: children_ratio.append('nan')
-            children.append(len(list(div.children)))
+            # children.append(len(list(div.children)))
             if len(div.find_all('main')) > 0:
                 tag_main.append('YES')
             else: 
@@ -106,7 +106,7 @@ def featureExtraction(soup, driver, root_area):
 
         
 def formCSVData(i):
-    data = {'tag_h': tag_h,'tag_p': tag_p,'tag_formatting': tag_formatting,'tag_table': tag_table,'word_count': word_count,'children_ratio': children_ratio,'children': children,'id_relevance_extent': id_relevance_extent,'tag_main': tag_main,'tag_article': tag_article,'x': coord_x,'y': coord_y,'height': height,'width': width,'element_area_ratio': element_area_ratio ,'class_value': class_value}
+    data = {'tag_h': tag_h,'tag_p': tag_p,'tag_formatting': tag_formatting,'tag_table': tag_table,'word_count': word_count,'children_ratio': children_ratio,'id_relevance_extent': id_relevance_extent,'tag_main': tag_main,'tag_article': tag_article,'x': coord_x,'y': coord_y,'height': height,'width': width,'element_area_ratio': element_area_ratio ,'class_value': class_value}
     # print('tag_h:' + str(len(tag_h)) + ', coord_x: ' + str(len(coord_x)) + ', coord_y: ' + str(len(coord_y)) + ', height: ' + str(len(height)) + ', width: ' + str(len(width)) + ', element_are_ratio: ' + str(len(element_area_ratio)))
     # col_names = ['tag_h1', 'tag_h2', 'tag_h3', 'tag_h4', 'tag_h5', 'tag_h6', 'tag_p', 'tag_b', 'tag_i', 'tag_u', 'tag_em', 'tag_small', 'tag_strike', 'tag_li', 'tag_ol', 'tag_ul', 'tag_table', 'word_count', 'children_ratio', 'id_relevance_extent', 'tag_main', 'tag_article']
     df = DataFrame(data)

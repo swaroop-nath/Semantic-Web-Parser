@@ -1,13 +1,20 @@
 import numpy as np
 import pandas as pd
-from sklearn.preprocessing import StandardScaler, LabelEncoder, OneHotEncoder
-from sklearn.cross_validation import train_test_split
+from sklearn.preprocessing import StandardScaler, LabelEncoder, OneHotEncoder, label_binarize
 from k_nn_classification import KNNClassifier as knn
-from sklearn.metrics import confusion_matrix
+from sklearn.metrics import confusion_matrix, roc_curve, auc
 from svm_classification import SVClassifier as svm
 from decision_tree_classification import DTClassifier as dtc
 from random_forest_classification import RFClassifier as rfc
 from sklearn.feature_selection import SelectFromModel
+from imblearn.over_sampling import SMOTE
+from sklearn.multiclass import OneVsRestClassifier as OVRC
+from sklearn.neighbors import KNeighborsClassifier as KNNC
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
+import matplotlib.pyplot as plt
+from sklearn.model_selection import KFold, train_test_split
+from sklearn.feature_selection import RFE
 
 def findConfusionMatrix(y_test, y_pred):
     return confusion_matrix(y_test, y_pred)
@@ -17,71 +24,68 @@ dataset = pd.read_csv('Second Iteration Data\data_gathered_part_first_segmentati
 X = dataset.iloc[:, :-1].values
 y = dataset.iloc[:, -1].values
 
+#y = label_binarize(y, classes = [0,1,2,3,4])
+#n_classes = y.shape[1]
+
 # Encoding Categorical Features
 labelEncoderTable = LabelEncoder().fit(X[:, 3])
-labelEncoderMain = LabelEncoder().fit(X[:, 8])
-labelEncoderArticle = LabelEncoder().fit(X[:, 9])
+labelEncoderMain = LabelEncoder().fit(X[:, 7])
+labelEncoderArticle = LabelEncoder().fit(X[:, 8])
 X[:, 3] = labelEncoderTable.transform(X[:, 3])
+X[:, 7] = labelEncoderTable.transform(X[:, 7])
 X[:, 8] = labelEncoderTable.transform(X[:, 8])
-X[:, 9] = labelEncoderTable.transform(X[:, 9])
 
-#sensitivity_knn = []
-#sensitivity_svm = []
-#sensitivity_dtc = []
-sensitivity_rfc = []
-sensitivity_rfc_t = []
-#count90l = 0
-#count95g = 0
+#X = X[:, [0, 1, 2, 4, 5, 10, 11, 13]]
 
-X = X[:, [0, 1, 2, 4, 5, 11, 12, 14]]
-
+#smote = SMOTE(sampling_strategy = 'not majority')
 #
-for i in range(1000):
-
-    # Splitting the data into train and test set with a 75-25 ratio
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.25)
-    
-    # Fitting a K-NN Classifier to the data and observing the results
-#    knn_classifier = knn(X_train, y_train)
-#    y_pred = knn_classifier.predictValues(X_test)
+##Splitting the data into test, validation and train set
+#from sklearn.model_selection import train_test_split
+#X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3)
+#X_sm, y_sm = smote.fit_sample(X_train, y_train)
+#y_sm = label_binarize(y_sm, [0,1,2,3,4])
+#y_test = label_binarize(y_test, [0,1,2,3,4])
+#n_classes = 5
+#
+#knn_classifier = OVRC(KNNC(n_neighbors = 5, metric = 'minkowski', p = 2)).fit(X_sm, y_sm)
+#y_score_knn = knn_classifier.predict_proba(X_test)
+#
+#dtc_classifier = OVRC(DecisionTreeClassifier(criterion = 'entropy')).fit(X_sm, y_sm)
+#y_score_dtc = dtc_classifier.predict_proba(X_test)
+#
+#rfc_classifier = OVRC(RandomForestClassifier(criterion = 'entropy')).fit(X_sm, y_sm)
+#y_score_rfc = rfc_classifier.predict_proba(X_test)
+#
+#fpr_knn = dict()
+#tpr_knn = dict()
+#auc_knn = dict()
+#for i in range(n_classes):
+#    fpr_knn[i], tpr_knn[i], thresh = roc_curve(y_test[:, i], y_score_knn[:, i])
+#    auc_knn[i] = auc(fpr_knn[i], tpr_knn[i])
 #    
-#    knnConfusionMatrix = findConfusionMatrix(y_test, y_pred)
-#    sensitivity_knn.append(knnConfusionMatrix[2, 2]/sum(knnConfusionMatrix[2]))
+#plt.figure()
+#plt.grid(True)
+#plt.xlim([-0.05, 1.00])
+#plt.ylim([0.0, 1.05])
+#plt.plot([0, 1], [0, 1], linestyle = '--', color = 'blue')
+#plt.plot(fpr_knn[2], tpr_knn[2], color = 'darkorange', label = 'ROC curve with AUC = %0.2f' %auc_knn[2])
+#plt.xlabel('False Positive Rate')
+#plt.ylabel('True Positive Rate')
+#plt.title('Receiver Operating Characteristic Curve for Decision Tree with SMOTE')
+#plt.legend(loc="lower right")
+#plt.show()
 
-#for i in range(100):
-#    # Splitting the data into train and test set with a 75-25 ratio
-#    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.25)
-    
-    # Fitting an SVM Classifier to the data and observing the results
-#    svm_classifier = svm(X_train, y_train)
-#    y_pred = svm_classifier.predictValues(X_test)
-#    
-#    svmConfusionMatrix = findConfusionMatrix(y_test, y_pred)
-#    sensitivity_svm.append(svmConfusionMatrix[2, 2]/sum(svmConfusionMatrix[2]))
-
-#for i in range(1):
-#   # Splitting the data into train and test set with a 75-25 ratio
-#   X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.25)
-#    
-   # Fitting a Decision Tree Classifier to the data and observing the results
-#    dtc_classifier = dtc(X_train, y_train)
-#    y_pred = dtc_classifier.predictValues(X_test)
-#
-#    dtcConfusionMatrix = findConfusionMatrix(y_test, y_pred)
-#    sensitivity_dtc.append(dtcConfusionMatrix[2, 2]/sum(dtcConfusionMatrix[2]))
-#
-##for i in range(100):
-##    # Splitting the data into train and test with a 75-25 ratio
-##    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.25)
-#
-#    # Fitting a Random Forest Classifier to the data and observing the results
-    rfc_classifier = rfc(X_train, y_train)
-    y_pred = rfc_classifier.predictValues(X_test)
-    y_t_pred = rfc_classifier.predictValues(X_train)
-
-    rfcConfusionMatrix = findConfusionMatrix(y_test, y_pred)
-    rfcTConfusionMatrix = findConfusionMatrix(y_train, y_t_pred)
-    sensitivity_rfc.append(rfcConfusionMatrix[2, 2]/sum(rfcConfusionMatrix[2]))
-    sensitivity_rfc_t.append(rfcTConfusionMatrix[2, 2]/sum(rfcTConfusionMatrix[2]))
-#count90l = count90l + len([j for j in sensitivity_rfc if j < 0.90])
-#count95g = count95g + len([j for j in sensitivity_rfc if j > 0.95])
+#Splitting the data into train and test
+X_train, X_test, y_train, y_test = train_test_split(X, y, random_state = 1, test_size = 0.3)
+smote = SMOTE()
+X_sm, y_sm = smote.fit_sample(X_train, y_train)
+rfc_1 = rfc(X_sm, y_sm)
+#rfc_2 = RandomForestClassifier(criterion = 'entropy')
+#selector = RFE(rfc_2, 7)
+#selector.fit(X_sm, y_sm)
+y_pred_1 = rfc_1.predictValues(X_test)
+#y_pred_2 = selector.estimator_.predict(selector.transform(X_test))
+matrix_1 = findConfusionMatrix(y_test, y_pred_1)
+#matrix_2 = findConfusionMatrix(y_test, y_pred_2)
+sensitivity_1 = matrix_1[2,2]/sum(matrix_1[2])
+#sensitivity_2 = matrix_2[2,2]/sum(matrix_2[2])

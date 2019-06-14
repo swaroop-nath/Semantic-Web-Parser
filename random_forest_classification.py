@@ -3,7 +3,7 @@ from sklearn.ensemble import RandomForestClassifier
 class RFClassifier:
     classifier = None
     def __init__(self, X_train, y_train):
-        self.classifier = RandomForestClassifier(criterion = 'entropy')
+        self.classifier = RandomForestClassifier(n_estimators = 100, criterion = 'entropy')
         self.classifier.fit(X_train, y_train)
         
     def predictValues(self, X_test):
