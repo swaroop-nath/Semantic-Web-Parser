@@ -110,7 +110,7 @@ def formCSVData(i):
     # print('tag_h:' + str(len(tag_h)) + ', coord_x: ' + str(len(coord_x)) + ', coord_y: ' + str(len(coord_y)) + ', height: ' + str(len(height)) + ', width: ' + str(len(width)) + ', element_are_ratio: ' + str(len(element_area_ratio)))
     # col_names = ['tag_h1', 'tag_h2', 'tag_h3', 'tag_h4', 'tag_h5', 'tag_h6', 'tag_p', 'tag_b', 'tag_i', 'tag_u', 'tag_em', 'tag_small', 'tag_strike', 'tag_li', 'tag_ol', 'tag_ul', 'tag_table', 'word_count', 'children_ratio', 'id_relevance_extent', 'tag_main', 'tag_article']
     df = DataFrame(data)
-    writer = ExcelWriter('Second Iteration Data\data_gathered_part_first_segmentation_'+str(i)+'.xlsx', engine = 'openpyxl')
+    writer = ExcelWriter('Second Iteration Data\data_gathered_part_first_segmentation_'+str(i+2)+'.xlsx', engine = 'openpyxl')
     # writer = ExcelWriter('xyz.xlsx', engine = 'openpyxl')
     df.to_excel(writer, sheet_name = 'Sheet1', header = True)
     writer.save()
@@ -136,7 +136,7 @@ def extractFrom(content, URI, i):
     tag_table.clear()
     word_count.clear()
     children_ratio.clear()
-    children.clear()
+    # children.clear()
     id_relevance_extent.clear()
     tag_main.clear()
     tag_article.clear()
