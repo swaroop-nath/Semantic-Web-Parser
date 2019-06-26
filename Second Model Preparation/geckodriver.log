@@ -213,3 +213,124 @@ JavaScript error: file:///D:/Passion/Machine%20Learning/Projects/Semantic_Web_Pa
  C
 ###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
 
+1561566685147	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\SWAROO~1\\AppData\\Local\\Temp\\rust_mozprofile.GPLtbAOwEdiv"
+1561566697542	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid host permission: resource://pdf.js/
+1561566697590	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid host permission: about:reader*
+[Parent 12592, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 332
+[Child 9380, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 332
+[Child 9380, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 332
+[Parent 12592, Gecko_IOThread] WARNING: file z:/build/build/src/ipc/chromium/src/base/process_util_win.cc, line 166
+1561566731258	Marionette	INFO	Listening on port 49931
+1561566732757	Marionette	WARN	TLS certificate errors will be ignored for this session
+[Parent 12592, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 332
+[Child 12972, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 332
+[Child 12972, [Parent 12592, Gecko_IOThread] WARNING: file z:/build/build/src/ipc/chromium/src/base/process_util_win.cc, line 166
+JavaScript error: file:///D:/Passion/Machine%20Learning/Projects/Semantic_Web_Parser_Model_Builder/Second%20Model%20Preparation/List%20of%20Sites/site_1_files/xd_arbiter.html, line 3: SecurityError: The operation is insecure.
+console.error: BroadcastService: 
+  receivedBroadcastMessage: handler for
+  remote-settings/monitor_changes
+  threw error:
+  Message: Error: Polling for changes failed: NetworkError when attempting to fetch resource..
+  Stack:
+    remoteSettingsFunction/remoteSettings.pollChanges@resource://services-settings/remote-settings.js:188:13
+
+[Parent 12592, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 332
+[Child 12840, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_w[iCnh.icc,l dl i1n1e884, Chrome_ChildThread] WA 332
+RNING: pipe [Child 12840, Chreorme_ChildTrhread] oWARNING: pipre : 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipec_channrel_win.rcc, line 332
+or: 109: file [Chilzd 118:8/4b,u Chrome_CihildThrelad] WARdNING: p/ipe errbor: 109: file uz:/build/buildi/src/iplc/chromdium/src/chrome//common/ipc_chsarncn/eilp_win.ccc, line 332
+/chromium/src/chrome/common/ipc_channel_win.cc, line 332
+[Child 12052, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 332
+[Child 12051561566951226	Marionette	INFO	Stopped listening on port 49931
+[GPU 1561567016314	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\SWAROO~1\\AppData\\Local\\Temp\\rust_mozprofile.zyt25fL8SYFn"
+1561567018764	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid host permission: resource://pdf.js/
+1561567018764	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid host permission: about:reader*
+[Parent 13988, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 332
+1561567033084	Marionette	INFO	Listening on port 50336
+[Child 13912, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 332
+[Child 13912, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/c1561567033864	Marionette	WARN	TLS certificate errors will be ignored for this session
+console.error: BroadcastService: 
+  receivedBroadcastMessage: handler for
+  remote-settings/monitor_changes
+  threw error:
+  Message: Error: Polling for changes failed: NetworkError when attempting to fetch resource..
+  Stack:
+    remoteSettingsFunction/remoteSettings.pollChanges@resource://services-settings/remote-settings.js:188:13
+
+1561567071185	Marionette	INFO	Stopped listening on port 50336
+[Parent 13988, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 332
+[Parent 13988, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 332
+[Child 14132, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 332
+[Child 14132, Chrome[Parent 13988, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 332
+[Child 13528, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 332
+[Child 13528, C[GPU 
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1286
+###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+
+1561567373010	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\SWAROO~1\\AppData\\Local\\Temp\\rust_mozprofile.JfqkDdzTbYRI"
+1561567374833	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid host permission: resource://pdf.js/
+1561567374834	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid host permission: about:reader*
+1561567387070	Marionette	INFO	Listening on port 50783
+[Child 11960, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 332
+[Child 11960,1561567387368	Marionette	WARN	TLS certificate errors will be ignored for this session
+[Parent 14452, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 332
+[Child 14712, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 332
+[Child 14712,JavaScript error: file:///D:/Passion/Machine%20Learning/Projects/Semantic_Web_Parser_Model_Builder/Second%20Model%20Preparation/List%20of%20Sites/site_3_files/cb=gapi.loaded_1, line 1: ReferenceError: gapi is not defined
+JavaScript error: file:///D:/Passion/Machine%20Learning/Projects/Semantic_Web_Parser_Model_Builder/Second%20Model%20Preparation/List%20of%20Sites/site_3_files/qevents.js.download, line 1: Error: Quora Pixel Error: Base pixel code is not installed properly.
+JavaScript error: file:///D:/Passion/Machine%20Learning/Projects/Semantic_Web_Parser_Model_Builder/Second%20Model%20Preparation/List%20of%20Sites/site_3_files/a.js.download, line 77: TypeError: g is undefined
+JavaScript error: file:///D:/Passion/Machine%20Learning/Projects/Semantic_Web_Parser_Model_Builder/Second%20Model%20Preparation/List%20of%20Sites/site_3_files/cb=gapi.loaded_0, line 1: ReferenceError: gapi is not defined
+JavaScript error: file:///D:/Passion/Machine%20Learning/Projects/Semantic_Web_Parser_Model_Builder/Second%20Model%20Preparation/List%20of%20Sites/site_3_files/a, line 1: ReferenceError: $WZRK_WR is not defined
+JavaScript error: file:///D:/Passion/Machine%20Learning/Projects/Semantic_Web_Parser_Model_Builder/Second%20Model%20Preparation/List%20of%20Sites/site_3_files/a(1), line 1: ReferenceError: $WZRK_WR is not defined
+JavaScript error: , line 0: uncaught exception: Failed to get parent origin from URL hash!
+JavaScript error: , line 0: uncaught exception: gapi.auth2.ExternallyVisibleError: Invalid cookiePolicy
+console.error: BroadcastService: 
+  receivedBroadcastMessage: handler for
+  remote-settings/monitor_changes
+  threw error:
+  Message: Error: Polling for changes failed: NetworkError when attempting to fetch resource..
+  Stack:
+    remoteSettingsFunction/remoteSettings.pollChanges@resource://services-settings/remote-settings.js:188:13
+
+[Parent 14452, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 332
+[Child 14340, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 332
+[Child 14340, Chrome_Child[Parent 14452, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 332
+[Child 15452, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 332
+[Child 15452, [Child 15420, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 332
+[Child 15420, Ch1561567441138	Marionette	INFO	Stopped listening on port 50783
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+[GP1561567455794	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\SWAROO~1\\AppData\\Local\\Temp\\rust_mozprofile.7sVeFMMiWQSE"
+1561567459003	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid host permission: resource://pdf.js/
+1561567459003	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid host permission: about:reader*
+1561567462406	Marionette	INFO	Listening on port 51032
+1561567462492	Marionette	WARN	TLS certificate errors will be ignored for this session
+[Child 16000, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 332
+[Child 16000, Chrome_ChildThread] WARNING: pipe JavaScript error: file:///D:/Passion/Machine%20Learning/Projects/Semantic_Web_Parser_Model_Builder/Second%20Model%20Preparation/List%20of%20Sites/site_3_files/cb=gapi.loaded_1, line 1: ReferenceError: gapi is not defined
+JavaScript error: file:///D:/Passion/Machine%20Learning/Projects/Semantic_Web_Parser_Model_Builder/Second%20Model%20Preparation/List%20of%20Sites/site_3_files/qevents.js.download, line 1: Error: Quora Pixel Error: Base pixel code is not installed properly.
+JavaScript error: file:///D:/Passion/Machine%20Learning/Projects/Semantic_Web_Parser_Model_Builder/Second%20Model%20Preparation/List%20of%20Sites/site_3_files/a.js.download, line 77: TypeError: g is undefined
+JavaScript error: file:///D:/Passion/Machine%20Learning/Projects/Semantic_Web_Parser_Model_Builder/Second%20Model%20Preparation/List%20of%20Sites/site_3_files/a, line 1: ReferenceError: $WZRK_WR is not defined
+JavaScript error: file:///D:/Passion/Machine%20Learning/Projects/Semantic_Web_Parser_Model_Builder/Second%20Model%20Preparation/List%20of%20Sites/site_3_files/a(1), line 1: ReferenceError: $WZRK_WR is not defined
+JavaScript error: , line 0: uncaught exception: Failed to get parent origin from URL hash!
+JavaScript error: , line 0: uncaught exception: gapi.auth2.ExternallyVisibleError: Invalid cookiePolicy
+JavaScript error: https://apis.google.com/_/scs/apps-static/_/js/k=oz.gapi.en.pDe8e7UaxCE.O/m=client/rt=j/sv=1/d=1/ed=1/am=wQE/rs=AGLTcCOxGzYrQZsPxlxbZS_N8HEAL18hEA/cb=gapi.loaded_0, line 1: TypeError: gapi.loaded_0 is not a function
+console.error: BroadcastService: 
+  receivedBroadcastMessage: handler for
+  remote-settings/monitor_changes
+  threw error:
+  Message: Error: Polling for changes failed: NetworkError when attempting to fetch resource..
+  Stack:
+    remoteSettingsFunction/remoteSettings.pollChanges@resource://services-settings/remote-settings.js:188:13
+
+1561567493831	Marionette	INFO	Stopped listening on port 51032
+[Parent 14872, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 332
+[Child 15056, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 332
+[Child[Parent 14872, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 332
+[Child 15564, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 332
+[Child 15564,[GPU 153
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1
+###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+

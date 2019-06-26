@@ -123,7 +123,7 @@ def clearAll():
 def formCSVData():
     data = {'tag_header' : tag_header, 'tag_para' : tag_para, 'tag_img' : tag_img, 'attr_src' : attr_src, 'class_image' : class_image, 'element_area_ratio' : element_area_ratio, 'word_count' : word_count, 'x' : coord_x, 'y' : coord_y, 'width' : width, 'height' : height, 'has_listing_related' : has_listing_related, 'tag_aside' : tag_aside, 'class_sidebar' : class_sidebar, 'name' : name, 'attrs' : attrs}
     df = DataFrame(data)
-    writer = ExcelWriter('First Iteration Data\data_gathered_part_second_segmentation_1.xlsx', engine = 'openpyxl')
+    writer = ExcelWriter('First Iteration Data\data_gathered_part_second_segmentation_3.xlsx', engine = 'openpyxl')
     df.to_excel(writer, sheet_name = 'Sheet1', header = True)
     writer.save()
 
@@ -135,13 +135,13 @@ def extractFrom(content, URI):
     root_x_path = xpath_soup(soup_object.body)
     root_element = driver.find_element_by_xpath(root_x_path)
     root_area = root_element.size.get('width') * root_element.size.get('height')
-    featureExtraction(soup_object.body.findAll('div', {'class' : 'main-container'}), driver, root_area)
+    featureExtraction(soup_object.body.findAll('section', {'class' : 'blog-body'}), driver, root_area)
     formCSVData()
     driver.quit()
     clearAll()
 
-f = open('List Of Sites\site_1.html', 'r', encoding = 'utf8', errors = 'ignore')
-URI = 'file:///D:/Passion/Machine%20Learning/Projects/Semantic_Web_Parser_Model_Builder/Second%20Model%20Preparation/List%20of%20Sites/site_1.html'
+f = open('List Of Sites\site_3.html', 'r', encoding = 'utf8', errors = 'ignore')
+URI = 'file:///D:/Passion/Machine%20Learning/Projects/Semantic_Web_Parser_Model_Builder/Second%20Model%20Preparation/List%20of%20Sites/site_3.html'
 content = f.read()
 f.close()
 extractFrom(content, URI)
