@@ -27,6 +27,8 @@ height = []
 has_listing_related = []
 tag_aside = []
 class_sidebar = []
+child_img = []
+child_text = []
 name = []
 attrs = []
 
@@ -56,7 +58,7 @@ def featureExtraction(soup, driver, root_area):
             if tag.name in paragraph_tags: tag_para.append('YES')
             else: tag_para.append('NO')
             
-            if tag.name is 'img': tag_img.append('YES')
+            if 'img' in tag.name: tag_img.append('YES')
             else: tag_img.append('NO')
             
             if 'src' in tag.attrs: attr_src.append('YES')
@@ -65,7 +67,7 @@ def featureExtraction(soup, driver, root_area):
             if 'class' in tag.attrs and contains(tag.attrs.get('class')): class_image.append('YES')
             else: class_image.append('NO')
             
-            if tag.name is 'aside': tag_aside.append('YES')
+            if 'aside' in tag.name: tag_aside.append('YES')
             else: tag_aside.append('NO')
             
             if tag.name in listing_tags: has_listing_related.append('YES')
@@ -97,6 +99,17 @@ def featureExtraction(soup, driver, root_area):
                 height.append('nan')
                 width.append('nan')
                 element_area_ratio.append('nan')
+            
+            children_tags = tag.children
+            flag_text = False
+            flag_img = False
+            for child in children_tags:
+                if child.name in paragraph_tags or child.name in header_tags: flag_text = True
+                if 'img' == child.name: flag_img = True
+            if flag_img: child_img.append('YES')
+            else: child_img.append('NO')
+            if flag_text: child_text.append('YES')
+            else: child_text.append('NO')
 
             name.append(tag.name)
             attrs.append(list(tag.attrs.values()))
@@ -121,7 +134,7 @@ def clearAll():
     attrs.clear()
         
 def formCSVData():
-    data = {'tag_header' : tag_header, 'tag_para' : tag_para, 'tag_img' : tag_img, 'attr_src' : attr_src, 'class_image' : class_image, 'element_area_ratio' : element_area_ratio, 'word_count' : word_count, 'x' : coord_x, 'y' : coord_y, 'width' : width, 'height' : height, 'has_listing_related' : has_listing_related, 'tag_aside' : tag_aside, 'class_sidebar' : class_sidebar, 'name' : name, 'attrs' : attrs}
+    data = {'tag_header' : tag_header, 'tag_para' : tag_para, 'tag_img' : tag_img, 'attr_src' : attr_src, 'class_image' : class_image, 'element_area_ratio' : element_area_ratio, 'word_count' : word_count, 'x' : coord_x, 'y' : coord_y, 'width' : width, 'height' : height, 'has_listing_related' : has_listing_related, 'tag_aside' : tag_aside, 'class_sidebar' : class_sidebar, 'child_img' : child_img, 'child_text' : child_text,'name' : name, 'attrs' : attrs}
     df = DataFrame(data)
     writer = ExcelWriter('First Iteration Data\data_gathered_part_second_segmentation_3.xlsx', engine = 'openpyxl')
     df.to_excel(writer, sheet_name = 'Sheet1', header = True)
