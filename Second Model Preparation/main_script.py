@@ -9,6 +9,7 @@ import pandas as pd
 import numpy as np
 from sklearn.metrics import confusion_matrix
 from sklearn.preprocessing import StandardScaler
+from imblearn.over_sampling import SMOTENC
 
 dataset = pd.read_csv('First Iteration Data\dataset.csv')
 
@@ -16,24 +17,23 @@ dataset = pd.read_csv('First Iteration Data\dataset.csv')
 encoder = LabelEncoder()
 dataset['tag_header'] = encoder.fit_transform(dataset['tag_header'].values)
 dataset['tag_para'] = encoder.fit_transform(dataset['tag_para'].values)
+dataset['tag_formatting'] = encoder.fit_transform(dataset['tag_formatting'].values)
+dataset['interacting_span_tag'] = encoder.fit_transform(dataset['interacting_span_tag'].values)
 dataset['tag_img'] = encoder.fit_transform(dataset['tag_img'].values)
-dataset['attr_src'] = encoder.fit_transform(dataset['attr_src'].values)
-dataset['class_image'] = encoder.fit_transform(dataset['class_image'].values)
-dataset['has_listing_related'] = encoder.fit_transform(dataset['has_listing_related'].values)
-dataset['tag_aside'] = encoder.fit_transform(dataset['tag_aside'].values)
-dataset['class_sidebar'] = encoder.fit_transform(dataset['class_sidebar'].values)
-dataset['child_img'] = encoder.fit_transform(dataset['child_img'].values)
-dataset['child_text'] = encoder.fit_transform(dataset['child_text'].values)
+dataset['src_img_interaction'] = encoder.fit_transform(dataset['src_img_interaction'].values)
+dataset['red_flag_class'] = encoder.fit_transform(dataset['red_flag_class'].values)
+dataset['tag_table'] = encoder.fit_transform(dataset['tag_table'].values)
+dataset['tag_sup'] = encoder.fit_transform(dataset['tag_sup'].values)
+dataset['tag_sup_child'] = encoder.fit_transform(dataset['tag_sup_child'].values)
+dataset['red_flag_id'] = encoder.fit_transform(dataset['red_flag_id'].values)
 
 #Transforming the variables
-dataset['element_area_ratio'] = np.cbrt(dataset.element_area_ratio)
-dataset['y'] = np.cbrt(dataset.y)
-dataset['word_count'] = np.log(dataset.word_count)
-dataset['height'] = np.cbrt(dataset.height)
-dataset['width'] = np.cbrt(dataset.width)
 
 X = dataset.iloc[:, :-1].values
 y = dataset.iloc[:, -1].values
+
+X[:, -1] = np.cbrt(X[:,-1])
+smote = SMOTENC(random_state = 42, categorical_features = [0,1,2,4,9,10,11,12,13,14,15])
 
 #Splitting the data into train-validation-test
 X_aux, X_test, y_aux, y_test = train_test_split(X, y, random_state = 42, test_size = 0.2)
@@ -50,11 +50,8 @@ cv = KFold(n_splits=10, random_state=42, shuffle=False)
 
 for train_index, test_index in cv.split(X_aux):
     X_train, X_validation, y_train, y_validation = X_aux[train_index], X_aux[test_index], y_aux[train_index], y_aux[test_index]
-    
-    sc = StandardScaler()
-    X_train[:, 7] = sc.fit_transform(X_train[:, 7].reshape(-1,1)).reshape(-1,)
-    X_validation[:, 7] = sc.transform(X_validation[:, 7].reshape(-1,1)).reshape(-1,)
 
+    X_train, y_train = smote.fit_resample(X_train, y_train)
     knn_classifier = KNNC(X_train, y_train)
     y_pred_knn = knn_classifier.predictValues(X_validation)
     y_pred_knn_t = knn_classifier.predictValues(X_train)
