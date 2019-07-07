@@ -177,7 +177,7 @@ def clearAll():
 def formCSVData():
     data = {'tag_header': tag_header, 'tag_para': tag_p, 'tag_formatting': tag_formatting, 'word_count': word_count, 'interacting_span_tag': tag_span_interaction, 'relative_x_coord': relative_x, 'relative_y_coord': relative_y, 'relative_listings': number_listing_per_word, 'relative_hyperlinks': number_hyper_per_word, 'tag_img': tag_img, 'src_img_interaction': attr_src_interation, 'red_flag_class': is_class_value_relevant, 'tag_table': tag_table, 'tag_sup': tag_sup, 'tag_sup_child': tag_sup_child, 'tag_tab_elem': tag_tab_elem, 'red_flag_id': is_id_value_relevant, 'relative_table_elements': number_td_type_per_word, 'height_width_diff': diff_height_width, 'name': name, 'attrs': attrs}
     df = DataFrame(data)
-    writer = ExcelWriter('First Iteration Data\data_gathered_part_second_segmentation_i.xlsx', engine = 'openpyxl')
+    writer = ExcelWriter('First Iteration Data\data_gathered_part_second_segmentation_5.xlsx', engine = 'openpyxl')
     df.to_excel(writer, sheet_name = 'Sheet1', header = True)
     writer.save()
 
@@ -196,6 +196,6 @@ def extractFrom(content, URI):
     clearAll()
 
 # f = open('List Of Sites\Wikipedia\site_3.html', 'r', encoding = 'utf8', errors = 'ignore')
-URI = 'https://en.wikipedia.org/wiki/Game_of_Thrones'
+URI = 'https://en.wikipedia.org/wiki/Global_Positioning_System'
 content = request.urlopen(URI)
 extractFrom(content, URI)
