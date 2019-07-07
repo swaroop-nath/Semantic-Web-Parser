@@ -29,6 +29,7 @@ is_class_value_relevant = [] # This indicates if the class value is one of - (th
 tag_table = [] # This indicates if the tag is one of - (table, tbody) 
 tag_sup = [] # This indicates if the tag is a sup (superscript)
 tag_sup_child = [] # This is used to filter out the hyperlinks which are a child of sup tag (superscript)
+tag_tab_elem = [] # This indicates whether the tag is a table element or not
 is_id_value_relevant = [] # This checks for ids belonging to Reference section or External Links section
 number_td_type_per_word = [] # This indicates the number of - (td, tr, th) tags contained with the current tag divided by the number of words 
 diff_height_width = []
@@ -43,6 +44,7 @@ FLAG_IMG = 'img'
 FLAG_TABLE = 'table'
 FLAG_SUP = 'sup'
 FLAG_A = 'a'
+FLAG_TABLE_ELEMENT = 'table_element'
 FLAG_UNNECESSARY_ID = 'unnecessary_id'
 FLAG_UNNECESSARY_CLASS = 'unnecessary_classes'
 FLAG_SPAN_INTERACTION = 'span_interaction'
@@ -62,15 +64,16 @@ def xpath_soup(element):
 def findTagType(name):
     name = name.strip()
     for header in header_tags:
-        if header == name: return FLAG_HEADER # Apparently removing 'is' by 'in' clause makes it work
-    if name == 'span': return FLAG_SPAN # Faulty case!
+        if header == name: return FLAG_HEADER
+    if name == 'span': return FLAG_SPAN
     if name == 'p': return FLAG_PARA 
     for format_tag in formatting_tags:
-        if name == format_tag: return FLAG_FORMATTING # Possibly faulty for multi lettered formatting tags
-    if name == 'img': return FLAG_IMG # Faulty case!
-    if 'table' == name or 'tbody' == name: return FLAG_TABLE # Faulty case!
+        if name == format_tag: return FLAG_FORMATTING
+    if name == 'img': return FLAG_IMG 
+    if 'table' == name or 'tbody' == name: return FLAG_TABLE 
     if name == 'sup': return FLAG_SUP
     if name == 'a': return FLAG_A
+    if name == 'td' or name == 'tr' or name == 'th': return FLAG_TABLE_ELEMENT
 
 def  findClassType(class_value):
     class_value = ''.join(class_value)
@@ -88,7 +91,7 @@ def featureExtraction(soup, driver, root_width, root_height):
     tags = soup[0].find_all()
     for tag in tags:
         if not isinstance(tag, NavigableString):
-            tag_appends = {'h': 'NO', 'p': 'NO', 'f': 'NO', 's': 'NO', 'i': 'NO', 't': 'NO', 'sup': 'NO', 'sup_child': 'NO'}
+            tag_appends = {'h': 'NO', 'p': 'NO', 'f': 'NO', 's': 'NO', 'i': 'NO', 't': 'NO', 'sup': 'NO', 'sup_child': 'NO', 'tab_elem': 'NO'}
             FLAG_VALUE = findTagType(tag.name)
             if FLAG_VALUE is FLAG_HEADER: tag_appends['h'] = 'YES'
             elif FLAG_VALUE is FLAG_PARA: tag_appends['p'] = 'YES'
@@ -100,6 +103,7 @@ def featureExtraction(soup, driver, root_width, root_height):
             elif FLAG_VALUE is FLAG_A:
                 parent = tag.parent
                 if parent.name == 'sup': tag_appends['sup_child'] = 'YES'
+            elif FLAG_VALUE is FLAG_TABLE_ELEMENT: tag_appends['tab_elem'] = 'YES'
             
             tag_header.append(tag_appends['h'])
             tag_p.append(tag_appends['p'])
@@ -108,6 +112,7 @@ def featureExtraction(soup, driver, root_width, root_height):
             tag_table.append(tag_appends['t'])
             tag_sup.append(tag_appends['sup'])
             tag_sup_child.append(tag_appends['sup_child'])
+            tag_tab_elem.append(tag_appends['tab_elem'])
 
             text = tag.text.strip()
             num_words = len(re.split(regexp, text))
@@ -170,9 +175,9 @@ def clearAll():
     pass
         
 def formCSVData():
-    data = {'tag_header': tag_header, 'tag_para': tag_p, 'tag_formatting': tag_formatting, 'word_count': word_count, 'interacting_span_tag': tag_span_interaction, 'relative_x_coord': relative_x, 'relative_y_coord': relative_y, 'relative_listings': number_listing_per_word, 'relative_hyperlinks': number_hyper_per_word, 'tag_img': tag_img, 'src_img_interaction': attr_src_interation, 'red_flag_class': is_class_value_relevant, 'tag_table': tag_table, 'tag_sup': tag_sup, 'tag_sup_child': tag_sup_child, 'red_flag_id': is_id_value_relevant, 'relative_table_elements': number_td_type_per_word, 'height_width_diff': diff_height_width, 'name': name, 'attrs': attrs}
+    data = {'tag_header': tag_header, 'tag_para': tag_p, 'tag_formatting': tag_formatting, 'word_count': word_count, 'interacting_span_tag': tag_span_interaction, 'relative_x_coord': relative_x, 'relative_y_coord': relative_y, 'relative_listings': number_listing_per_word, 'relative_hyperlinks': number_hyper_per_word, 'tag_img': tag_img, 'src_img_interaction': attr_src_interation, 'red_flag_class': is_class_value_relevant, 'tag_table': tag_table, 'tag_sup': tag_sup, 'tag_sup_child': tag_sup_child, 'tag_tab_elem': tag_tab_elem, 'red_flag_id': is_id_value_relevant, 'relative_table_elements': number_td_type_per_word, 'height_width_diff': diff_height_width, 'name': name, 'attrs': attrs}
     df = DataFrame(data)
-    writer = ExcelWriter('First Iteration Data\data_gathered_part_second_segmentation_2.xlsx', engine = 'openpyxl')
+    writer = ExcelWriter('First Iteration Data\data_gathered_part_second_segmentation_i.xlsx', engine = 'openpyxl')
     df.to_excel(writer, sheet_name = 'Sheet1', header = True)
     writer.save()
 
@@ -191,6 +196,6 @@ def extractFrom(content, URI):
     clearAll()
 
 # f = open('List Of Sites\Wikipedia\site_3.html', 'r', encoding = 'utf8', errors = 'ignore')
-URI = 'https://en.wikipedia.org/wiki/Data_science'
+URI = 'https://en.wikipedia.org/wiki/Game_of_Thrones'
 content = request.urlopen(URI)
 extractFrom(content, URI)

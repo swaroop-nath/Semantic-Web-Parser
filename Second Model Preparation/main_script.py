@@ -25,19 +25,27 @@ dataset['red_flag_class'] = encoder.fit_transform(dataset['red_flag_class'].valu
 dataset['tag_table'] = encoder.fit_transform(dataset['tag_table'].values)
 dataset['tag_sup'] = encoder.fit_transform(dataset['tag_sup'].values)
 dataset['tag_sup_child'] = encoder.fit_transform(dataset['tag_sup_child'].values)
+dataset['tag_elem'] = encoder.fit_transform(dataset['tag_elem'].values)
 dataset['red_flag_id'] = encoder.fit_transform(dataset['red_flag_id'].values)
+
+dataset['height_width_diff'] = np.cbrt(dataset['height_width_diff'].values)
 
 #Transforming the variables
 data = dataset.iloc[:, :-2]
+data['tag_header_y_interacted'] = np.multiply(data['tag_header'], data['relative_y_coord'])
+data['span_interaction_y_interacted'] = np.multiply(data['interacting_span_tag'], data['relative_y_coord'])
+data['tag_para_y_interacted'] = np.multiply(data['tag_para'], data['relative_y_coord'])
+feature_list = np.append(range(18), range(19,22))
 X = data.iloc[:, :-1].values
-y = data.iloc[:, -1].values
+y = data.iloc[:, 19].values
+column_names = list(data.columns)
+column_names.pop(19)
 
-X[:, -1] = np.cbrt(X[:,-1])
 #smote = SMOTENC(random_state = 42, categorical_features = [0,1,2,4,9,10,11,12,13,14,15])
 
 #Splitting the data into train-validation-test
 X_aux, X_test, y_aux, y_test = train_test_split(X, y, random_state = 42, test_size = 0.2)
-X_train, X_validation, y_train, y_validation = train_test_split(X_aux, y_aux, random_state = 42, test_size = 0.2)
+#X_train, X_validation, y_train, y_validation = train_test_split(X_aux, y_aux, random_state = 42, test_size = 0.2)
 
 #recall_scores_knn = []
 #recall_scores_knn_t = []
@@ -81,8 +89,14 @@ X_train, X_validation, y_train, y_validation = train_test_split(X_aux, y_aux, ra
 #    recall_scores_rfc_t.append(matrix_rfc_t[1,1]/sum(matrix_rfc_t[1]))
 
 def findEquality(i, x):
-    if X_validation[x, -1] == dataset.height_width_diff[i] and X_validation[x, 5] == dataset.relative_x_coord[i] and X_validation[x, 6] == dataset.relative_y_coord[i]: return True
-    else: return False
+    one_set = X_validation[x]
+    second_set = dataset.iloc[i, :-3].values
+    flag = True
+    for j in range(len(second_set)):
+        if one_set[j] != second_set[j]:
+            flag = False
+            break
+    return flag
 
 def findFaultyCases(y_true, y_pred):
     faulty_indices = []
@@ -96,7 +110,22 @@ def findFaultyCases(y_true, y_pred):
         
     return faulty_cases
 
-rfc_classifier = RFC(X_train, y_train)
-y_pred = rfc_classifier.predictValues(X_validation)
-faults = findFaultyCases(y_validation, y_pred)
-matrix = confusion_matrix(y_validation, y_pred)
+#rfc_classifier = RFC(X_train, y_train)
+#y_pred = rfc_classifier.predictValues(X_validation)
+#faults, temps = findFaultyCases(y_validation, y_pred)
+#matrix = confusion_matrix(y_validation, y_pred)
+#
+#faulty_cases = dataset.iloc[faults, :]
+    
+cv = KFold(n_splits=10, random_state=42, shuffle=False)
+faults = []
+recall = []
+precision = []
+for train_index, test_index in cv.split(X_aux):
+    X_train, X_validation, y_train, y_validation = X_aux[train_index], X_aux[test_index], y_aux[train_index], y_aux[test_index]
+    rfc_classifier = RFC(X_train, y_train)
+    y_pred = rfc_classifier.predictValues(X_validation)
+    faults.append(findFaultyCases(y_validation, y_pred))
+    matrix = confusion_matrix(y_validation, y_pred)
+    recall.append(matrix[1,1]/sum(matrix[1]))
+    precision.append(matrix[1,1]/(matrix[0,1]+matrix[1,1]))
