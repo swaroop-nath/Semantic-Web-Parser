@@ -10,6 +10,7 @@ from selenium.common.exceptions import NoSuchElementException as NSEE
 header_tags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']
 formatting_tags = ['i', 'b', 'u', 'em', 'small', 'strike', 'strong'] 
 class_values = ['thumb', 'image', 'caption', 'toc', 'infobox', 'img', 'reflist', 'nowrap', 'reference', 'navbox', 'footer', 'catlinks']
+math_element_tags = ['mi', 'mo', 'mrow', 'mstyle', 'mfrac', 'msub', 'mtable', 'mtr', 'mtd', 'mn', 'mover', 'munder', 'msqrt', 'msup', 'mtext']
 table_tag_values = ['table', 'tbody']
 td_type_values = ['td', 'tr', 'th']
 regexp = '; |, | |\n|-\*'
@@ -32,6 +33,10 @@ tag_sup_child = [] # This is used to filter out the hyperlinks which are a child
 tag_tab_elem = [] # This indicates whether the tag is a table element or not
 is_id_value_relevant = [] # This checks for ids belonging to Reference section or External Links section
 number_td_type_per_word = [] # This indicates the number of - (td, tr, th) tags contained with the current tag divided by the number of words 
+tag_dl_type = []
+tag_math_type = []
+tag_math_elem = []
+tag_annotation = []
 diff_height_width = []
 name = []
 attrs = []
@@ -44,6 +49,10 @@ FLAG_IMG = 'img'
 FLAG_TABLE = 'table'
 FLAG_SUP = 'sup'
 FLAG_A = 'a'
+FLAG_DL_DD = 'dl_dd'
+FLAG_MATH_TYPE = 'math_semantics'
+FLAG_MATH_ELEM = 'math_elements'
+FLAG_ANNOTATION = 'annotation'
 FLAG_TABLE_ELEMENT = 'table_element'
 FLAG_UNNECESSARY_ID = 'unnecessary_id'
 FLAG_UNNECESSARY_CLASS = 'unnecessary_classes'
@@ -74,6 +83,11 @@ def findTagType(name):
     if name == 'sup': return FLAG_SUP
     if name == 'a': return FLAG_A
     if name == 'td' or name == 'tr' or name == 'th': return FLAG_TABLE_ELEMENT
+    if name == 'dl' or name == 'dd': return FLAG_DL_DD
+    if name == 'math' or name == 'semantics': return FLAG_MATH_TYPE
+    for math_elem in math_element_tags:
+        if math_elem == name: return FLAG_MATH_ELEM
+    if name == 'annotation': return FLAG_ANNOTATION
 
 def  findClassType(class_value):
     class_value = ''.join(class_value)
@@ -91,7 +105,7 @@ def featureExtraction(soup, driver, root_width, root_height):
     tags = soup[0].find_all()
     for tag in tags:
         if not isinstance(tag, NavigableString):
-            tag_appends = {'h': 'NO', 'p': 'NO', 'f': 'NO', 's': 'NO', 'i': 'NO', 't': 'NO', 'sup': 'NO', 'sup_child': 'NO', 'tab_elem': 'NO'}
+            tag_appends = {'h': 'NO', 'p': 'NO', 'f': 'NO', 's': 'NO', 'i': 'NO', 't': 'NO', 'sup': 'NO', 'sup_child': 'NO', 'tab_elem': 'NO', 'dl': 'NO', 'math_type': 'NO', 'math_elem': 'NO', 'annot': 'NO'}
             FLAG_VALUE = findTagType(tag.name)
             if FLAG_VALUE is FLAG_HEADER: tag_appends['h'] = 'YES'
             elif FLAG_VALUE is FLAG_PARA: tag_appends['p'] = 'YES'
@@ -104,7 +118,11 @@ def featureExtraction(soup, driver, root_width, root_height):
                 parent = tag.parent
                 if parent.name == 'sup': tag_appends['sup_child'] = 'YES'
             elif FLAG_VALUE is FLAG_TABLE_ELEMENT: tag_appends['tab_elem'] = 'YES'
-            
+            elif FLAG_VALUE is FLAG_DL_DD: tag_appends['dl'] = 'YES'
+            elif FLAG_VALUE is FLAG_MATH_TYPE: tag_appends['math_type'] = 'YES'
+            elif FLAG_VALUE is FLAG_MATH_ELEM: tag_appends['math_elem'] = 'YES'
+            elif FLAG_VALUE is FLAG_ANNOTATION: tag_appends['annot'] = 'YES'
+
             tag_header.append(tag_appends['h'])
             tag_p.append(tag_appends['p'])
             tag_formatting.append(tag_appends['f'])
@@ -113,6 +131,10 @@ def featureExtraction(soup, driver, root_width, root_height):
             tag_sup.append(tag_appends['sup'])
             tag_sup_child.append(tag_appends['sup_child'])
             tag_tab_elem.append(tag_appends['tab_elem'])
+            tag_dl_type.append(tag_appends['dl'])
+            tag_math_type.append(tag_appends['math_type'])
+            tag_math_elem.append(tag_appends['math_elem'])
+            tag_annotation.append(tag_appends['annotation'])
 
             text = tag.text.strip()
             num_words = len(re.split(regexp, text))
@@ -175,7 +197,7 @@ def clearAll():
     pass
         
 def formCSVData():
-    data = {'tag_header': tag_header, 'tag_para': tag_p, 'tag_formatting': tag_formatting, 'word_count': word_count, 'interacting_span_tag': tag_span_interaction, 'relative_x_coord': relative_x, 'relative_y_coord': relative_y, 'relative_listings': number_listing_per_word, 'relative_hyperlinks': number_hyper_per_word, 'tag_img': tag_img, 'src_img_interaction': attr_src_interation, 'red_flag_class': is_class_value_relevant, 'tag_table': tag_table, 'tag_sup': tag_sup, 'tag_sup_child': tag_sup_child, 'tag_tab_elem': tag_tab_elem, 'red_flag_id': is_id_value_relevant, 'relative_table_elements': number_td_type_per_word, 'height_width_diff': diff_height_width, 'name': name, 'attrs': attrs}
+    data = {'tag_header': tag_header, 'tag_para': tag_p, 'tag_formatting': tag_formatting, 'word_count': word_count, 'interacting_span_tag': tag_span_interaction, 'relative_x_coord': relative_x, 'relative_y_coord': relative_y, 'relative_listings': number_listing_per_word, 'relative_hyperlinks': number_hyper_per_word, 'tag_img': tag_img, 'src_img_interaction': attr_src_interation, 'red_flag_class': is_class_value_relevant, 'tag_table': tag_table, 'tag_sup': tag_sup, 'tag_sup_child': tag_sup_child, 'tag_tab_elem': tag_tab_elem, 'red_flag_id': is_id_value_relevant, 'relative_table_elements': number_td_type_per_word, 'height_width_diff': diff_height_width, 'tag_dl_type': tag_dl_type, 'tag_math_type': tag_math_type, 'tag_math_elem': tag_math_elem, 'tag_annotation': tag_annotation, 'name': name, 'attrs': attrs}
     df = DataFrame(data)
     writer = ExcelWriter('First Iteration Data\data_gathered_part_second_segmentation_5.xlsx', engine = 'openpyxl')
     df.to_excel(writer, sheet_name = 'Sheet1', header = True)
