@@ -10,10 +10,14 @@ X = dataset.iloc[:, :-1].values
 y = dataset.iloc[:, -1].values
 
 # Clean the dataset
-X[:, 3] = LabelEncoder().fit_transform(X[:, 3])
-X[:, 7] = LabelEncoder().fit_transform(X[:, 7])
-X[:, 8]= LabelEncoder().fit_transform(X[:, 8])
+table_encoder = LabelEncoder()
+main_encoder = LabelEncoder()
+article_encoder = LabelEncoder()
+X[:, 3] = table_encoder.fit_transform(X[:, 3])
+X[:, 7] = main_encoder.fit_transform(X[:, 7])
+X[:, 8]= article_encoder.fit_transform(X[:, 8])
 
 # Training the model on the entire dataset
 model = rfc(X, y)
 pickle.dump(model, open("first_classifier.pkl", "wb"))
+pickle.dump((table_encoder, main_encoder, article_encoder), open('first_phase_encoders.pkl', 'wb'))
