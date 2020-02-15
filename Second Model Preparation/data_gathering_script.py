@@ -4,7 +4,6 @@ import re
 from pandas import DataFrame, ExcelWriter
 from selenium import webdriver
 import itertools
-import time
 from selenium.common.exceptions import NoSuchElementException as NSEE
 
 header_tags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']
