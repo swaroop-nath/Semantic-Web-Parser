@@ -1,0 +1,16 @@
+word-count: This value should, ideally, be high for necessary label. However due to the nature of the data in html dom tree - fairly large number of necessary labelled samples have low word_count too. Could there be some kind of modifier for this field?
+
+Scenarios - 
+	1. an a tag inside p will have low word_count. Should you multiply word_count for every tag inside a necessary labelled tag? That will cause high word_count values for unnecessary tags like sup.
+	2. Header tags also have low word_count values. May be these can be tackled by having some multiplier specifically for tag_header = 'YES' and interacting_span_tag = 'YES'.
+	3. Unnecessary things at the bottom have a large word_count. Would be good to multiply word_count with (1 - relative_y_coord)? - Not the analog value, rather keep some threshold.
+
+height_width_diff: Is this any more informative than separate height and width?
+
+relative_listing and relative_hyperlinks and relative_table_elements: Are they necessary? Due to the new perspective on the model, judge if they are necessary or not. Plus how would you deal with the possibility of presence of listings in main body?
+
+tag_sup_child and tag_tab_elem: Due to the new perspective on the model, judge if this feature is necessary.
+
+Overall: Usually things at the bottom are unnecessary - p or header tags, immaterial. Is there any way to properly distinguish them visually?
+
+red_flag_id: Does it deal with headers at the bottom end? Can it be further generalized?

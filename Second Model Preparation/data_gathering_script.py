@@ -1,6 +1,6 @@
 import urllib.request as request
 from bs4 import BeautifulSoup, NavigableString
-import re
+import re, os
 from pandas import DataFrame, ExcelWriter
 from selenium import webdriver
 import itertools
@@ -48,10 +48,10 @@ FLAG_IMG = 'img'
 FLAG_TABLE = 'table'
 FLAG_SUP = 'sup'
 FLAG_A = 'a'
-FLAG_DL_DD = 'dl_dd'
-FLAG_MATH_TYPE = 'math_semantics'
-FLAG_MATH_ELEM = 'math_elements'
-FLAG_ANNOTATION = 'annotation'
+#FLAG_DL_DD = 'dl_dd'
+#FLAG_MATH_TYPE = 'math_semantics'
+#FLAG_MATH_ELEM = 'math_elements'
+#FLAG_ANNOTATION = 'annotation'
 FLAG_TABLE_ELEMENT = 'table_element'
 FLAG_UNNECESSARY_ID = 'unnecessary_id'
 FLAG_UNNECESSARY_CLASS = 'unnecessary_classes'
@@ -82,20 +82,20 @@ def findTagType(name):
     if name == 'sup': return FLAG_SUP
     if name == 'a': return FLAG_A
     if name == 'td' or name == 'tr' or name == 'th': return FLAG_TABLE_ELEMENT
-    if name == 'dl' or name == 'dd': return FLAG_DL_DD
-    if name == 'math' or name == 'semantics': return FLAG_MATH_TYPE
-    for math_elem in math_element_tags:
-        if math_elem == name: return FLAG_MATH_ELEM
-    if name == 'annotation': return FLAG_ANNOTATION
+#    if name == 'dl' or name == 'dd': return FLAG_DL_DD
+#    if name == 'math' or name == 'semantics': return FLAG_MATH_TYPE
+#    for math_elem in math_element_tags:
+#        if math_elem == name: return FLAG_MATH_ELEM
+#    if name == 'annotation': return FLAG_ANNOTATION
 
 def  findClassType(class_value):
     class_value = ''.join(class_value)
     for value in class_values:
         if value in class_value: 
-            return FLAG_UNNECESSARY_CLASS # Faulty!!!!
+            return FLAG_UNNECESSARY_CLASS 
     if 'head' in class_value: 
-        return FLAG_SPAN_INTERACTION # Faulty!!!!
-
+        return FLAG_SPAN_INTERACTION 
+    
 def findIdType(id):
     id = id.lower()
     if id == 'references' or 'external' in id: return FLAG_UNNECESSARY_ID
@@ -117,10 +117,10 @@ def featureExtraction(soup, driver, root_width, root_height):
                 parent = tag.parent
                 if parent.name == 'sup': tag_appends['sup_child'] = 'YES'
             elif FLAG_VALUE is FLAG_TABLE_ELEMENT: tag_appends['tab_elem'] = 'YES'
-            elif FLAG_VALUE is FLAG_DL_DD: tag_appends['dl'] = 'YES'
-            elif FLAG_VALUE is FLAG_MATH_TYPE: tag_appends['math_type'] = 'YES'
-            elif FLAG_VALUE is FLAG_MATH_ELEM: tag_appends['math_elem'] = 'YES'
-            elif FLAG_VALUE is FLAG_ANNOTATION: tag_appends['annot'] = 'YES'
+#            elif FLAG_VALUE is FLAG_DL_DD: tag_appends['dl'] = 'YES'
+#            elif FLAG_VALUE is FLAG_MATH_TYPE: tag_appends['math_type'] = 'YES'
+#            elif FLAG_VALUE is FLAG_MATH_ELEM: tag_appends['math_elem'] = 'YES'
+#            elif FLAG_VALUE is FLAG_ANNOTATION: tag_appends['annot'] = 'YES'
 
             tag_header.append(tag_appends['h'])
             tag_p.append(tag_appends['p'])
@@ -130,10 +130,10 @@ def featureExtraction(soup, driver, root_width, root_height):
             tag_sup.append(tag_appends['sup'])
             tag_sup_child.append(tag_appends['sup_child'])
             tag_tab_elem.append(tag_appends['tab_elem'])
-            tag_dl_type.append(tag_appends['dl'])
-            tag_math_type.append(tag_appends['math_type'])
-            tag_math_elem.append(tag_appends['math_elem'])
-            tag_annotation.append(tag_appends['annotation'])
+#            tag_dl_type.append(tag_appends['dl'])
+#            tag_math_type.append(tag_appends['math_type'])
+#            tag_math_elem.append(tag_appends['math_elem'])
+#            tag_annotation.append(tag_appends['annotation'])
 
             text = tag.text.strip()
             num_words = len(re.split(regexp, text))
@@ -160,18 +160,18 @@ def featureExtraction(soup, driver, root_width, root_height):
 
             num_li_ol = len(tag.find_all('li'))
             if num_words != 0: number_listing_per_word.append(num_li_ol/(num_words))
-            else: number_listing_per_word.append('nan')
+            else: number_listing_per_word.append(10)
 
             num_hyperlinks = len(tag.find_all(lambda tg: tg.name == "a" and len(tg.attrs) > 1 and 'href' in tg.attrs))
             if num_words != 0: number_hyper_per_word.append(num_hyperlinks/(num_words))
-            else: number_hyper_per_word.append('nan')
+            else: number_hyper_per_word.append(10)
 
             if tag_appends['i'] is 'YES' and 'src' in tag.attrs: attr_src_interation.append('YES')
             else: attr_src_interation.append('NO')
 
             num_td_tr_th = len(tag.find_all('td')) + len(tag.find_all('tr')) + len(tag.find_all('th'))
             if num_words != 0: number_td_type_per_word.append(num_td_tr_th/(num_words))
-            else: number_td_type_per_word.append('nan')
+            else: number_td_type_per_word.append(100)
 
             try:
                 x_path_tag = xpath_soup(tag)
@@ -184,9 +184,9 @@ def featureExtraction(soup, driver, root_width, root_height):
                 temp_w = 0 if temp_w is None else temp_w
                 diff_height_width.append(temp_h - temp_w)
             except NSEE:
-                relative_x.append('nan')
-                relative_y.append('nan')
-                diff_height_width.append('nan')
+                relative_x.append(0)
+                relative_y.append(0)
+                diff_height_width.append(0)
 
             name.append(tag.name)
             attrs.append(list(tag.attrs.values()))
@@ -196,15 +196,19 @@ def clearAll():
     pass
         
 def formCSVData():
-    data = {'tag_header': tag_header, 'tag_para': tag_p, 'tag_formatting': tag_formatting, 'word_count': word_count, 'interacting_span_tag': tag_span_interaction, 'relative_x_coord': relative_x, 'relative_y_coord': relative_y, 'relative_listings': number_listing_per_word, 'relative_hyperlinks': number_hyper_per_word, 'tag_img': tag_img, 'src_img_interaction': attr_src_interation, 'red_flag_class': is_class_value_relevant, 'tag_table': tag_table, 'tag_sup': tag_sup, 'tag_sup_child': tag_sup_child, 'tag_tab_elem': tag_tab_elem, 'red_flag_id': is_id_value_relevant, 'relative_table_elements': number_td_type_per_word, 'height_width_diff': diff_height_width, 'tag_dl_type': tag_dl_type, 'tag_math_type': tag_math_type, 'tag_math_elem': tag_math_elem, 'tag_annotation': tag_annotation, 'name': name, 'attrs': attrs}
+    data = {'tag_header': tag_header, 'tag_para': tag_p, 'tag_formatting': tag_formatting, 'word_count': word_count, 'interacting_span_tag': tag_span_interaction, 'relative_x_coord': relative_x, 'relative_y_coord': relative_y, 'relative_listings': number_listing_per_word, 'relative_hyperlinks': number_hyper_per_word, 'tag_img': tag_img, 'src_img_interaction': attr_src_interation, 'red_flag_class': is_class_value_relevant, 'tag_table': tag_table, 'tag_sup': tag_sup, 'tag_sup_child': tag_sup_child, 'tag_tab_elem': tag_tab_elem, 'red_flag_id': is_id_value_relevant, 'relative_table_elements': number_td_type_per_word, 'height_width_diff': diff_height_width, 'name': name, 'attrs': attrs}
     df = DataFrame(data)
-    writer = ExcelWriter('First Iteration Data\data_gathered_part_second_segmentation_5.xlsx', engine = 'openpyxl')
+    writer = ExcelWriter('Second Iteration Data\data_gathered_part_second_segmentation_4.xlsx', engine = 'openpyxl')
     df.to_excel(writer, sheet_name = 'Sheet1', header = True)
     writer.save()
 
 def extractFrom(content, URI):
     soup_object = BeautifulSoup(content, 'lxml')
-    driver = webdriver.Firefox(executable_path=r'D:\Softwares\Anaconda\Anaconda\geckodriver-v0.24.0-win64\geckodriver.exe')
+    
+    chrome_driver_path = r'/Softwares/Web-Drivers/chromedriver'
+    os.environ["webdriver.chrome.driver"] = chrome_driver_path
+    driver = webdriver.Chrome(chrome_driver_path)
+    
     driver.get(URI)
     # time.sleep(5)
     root_x_path = xpath_soup(soup_object.body.find_all('div', {'class': 'mw-body'})[0])
@@ -217,6 +221,6 @@ def extractFrom(content, URI):
     clearAll()
 
 # f = open('List Of Sites\Wikipedia\site_3.html', 'r', encoding = 'utf8', errors = 'ignore')
-URI = 'https://en.wikipedia.org/wiki/Global_Positioning_System'
+URI = 'https://en.wikipedia.org/wiki/Artificial_intelligence'
 content = request.urlopen(URI)
 extractFrom(content, URI)
