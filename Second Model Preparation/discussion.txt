@@ -3,7 +3,7 @@ The model is currently valuing y coordinate data much more than other features, 
 Inference - The data is causing a huge amount of bias in the algorithm, in terms of population data. It may be removed by eliminating children of elements which get labelled 0 in the dataset.
 
 
-1. 'hatnote' and 'noprint' and 'quote' and 'empty' and 'edit section' can be introduced as  red flag classes.
+1. 'hatnote' and 'noprint' and 'quote' and 'empty' and 'editsection' can be introduced as  red flag classes.
 
 2. Include style attribute too as a feature. Some elements have style = 'display:none'
 
