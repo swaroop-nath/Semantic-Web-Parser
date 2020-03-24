@@ -19,6 +19,6 @@ Inference - The data is causing a huge amount of bias in the algorithm, in terms
 
 
 Game of Thrones
-Data Science
+Data Science - https://en.wikipedia.org/wiki/Data_science
 ML
 A/I

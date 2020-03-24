@@ -7,11 +7,12 @@ import itertools
 from selenium.common.exceptions import NoSuchElementException as NSEE
 
 header_tags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']
-formatting_tags = ['i', 'b', 'u', 'em', 'small', 'strike', 'strong'] 
-class_values = ['thumb', 'image', 'caption', 'toc', 'infobox', 'img', 'reflist', 'nowrap', 'reference', 'navbox', 'footer', 'catlinks']
+formatting_tags = ['i', 'b', 'u', 'em', 'small', 'strike', 'strong', 'pre'] 
+class_values = ['thumb', 'image', 'caption', 'toc', 'infobox', 'img', 'reflist', 'nowrap', 'reference', 'navbox', 'footer', 'catlinks', 'hatnote', 'noprint', 'quote', 'empty', 'editsection']
 math_element_tags = ['mi', 'mo', 'mrow', 'mstyle', 'mfrac', 'msub', 'mtable', 'mtr', 'mtd', 'mn', 'mover', 'munder', 'msqrt', 'msup', 'mtext']
 table_tag_values = ['table', 'tbody']
 td_type_values = ['td', 'tr', 'th']
+red_flag_texts = ['references', 'see also', 'further reading', 'external links']
 regexp = '; |, | |\n|-\*'
 
 tag_header = [] # This indicates if the tag has any header tags (h1, h2, h3, h4, h5, h6)
@@ -28,15 +29,14 @@ attr_src_interation = [] # This is a interaction term between the variables - do
 is_class_value_relevant = [] # This indicates if the class value is one of - (thumb, image, caption, toc, infobox,img) 
 tag_table = [] # This indicates if the tag is one of - (table, tbody) 
 tag_sup = [] # This indicates if the tag is a sup (superscript)
-tag_sup_child = [] # This is used to filter out the hyperlinks which are a child of sup tag (superscript)
-tag_tab_elem = [] # This indicates whether the tag is a table element or not
 is_id_value_relevant = [] # This checks for ids belonging to Reference section or External Links section
 number_td_type_per_word = [] # This indicates the number of - (td, tr, th) tags contained with the current tag divided by the number of words 
-tag_dl_type = []
-tag_math_type = []
-tag_math_elem = []
-tag_annotation = []
+tag_unnecessary_header = [] # This incorporates the headers which contain red_flag_texts
+tag_math_span = []
 diff_height_width = []
+height = []
+width = []
+aspect_ratio = []
 name = []
 attrs = []
 
@@ -47,15 +47,14 @@ FLAG_SPAN = 'span'
 FLAG_IMG = 'img'
 FLAG_TABLE = 'table'
 FLAG_SUP = 'sup'
-FLAG_A = 'a'
 #FLAG_DL_DD = 'dl_dd'
 #FLAG_MATH_TYPE = 'math_semantics'
 #FLAG_MATH_ELEM = 'math_elements'
 #FLAG_ANNOTATION = 'annotation'
-FLAG_TABLE_ELEMENT = 'table_element'
 FLAG_UNNECESSARY_ID = 'unnecessary_id'
 FLAG_UNNECESSARY_CLASS = 'unnecessary_classes'
 FLAG_SPAN_INTERACTION = 'span_interaction'
+FLAG_MATH_SPAN = 'math_span'
 
 def xpath_soup(element):
     components = []
@@ -80,8 +79,6 @@ def findTagType(name):
     if name == 'img': return FLAG_IMG 
     if 'table' == name or 'tbody' == name: return FLAG_TABLE 
     if name == 'sup': return FLAG_SUP
-    if name == 'a': return FLAG_A
-    if name == 'td' or name == 'tr' or name == 'th': return FLAG_TABLE_ELEMENT
 #    if name == 'dl' or name == 'dd': return FLAG_DL_DD
 #    if name == 'math' or name == 'semantics': return FLAG_MATH_TYPE
 #    for math_elem in math_element_tags:
@@ -92,13 +89,20 @@ def  findClassType(class_value):
     class_value = ''.join(class_value)
     for value in class_values:
         if value in class_value: 
-            return FLAG_UNNECESSARY_CLASS 
+            return FLAG_UNNECESSARY_CLASS
+    if 'math' in class_value:
+        return FLAG_MATH_SPAN
     if 'head' in class_value: 
         return FLAG_SPAN_INTERACTION 
     
 def findIdType(id):
     id = id.lower()
     if id == 'references' or 'external' in id: return FLAG_UNNECESSARY_ID
+    
+def is_unnecessary_text(text):
+    for val in red_flag_texts:
+        if val in text.lower(): return True
+    return False
 
 def featureExtraction(soup, driver, root_width, root_height):
     tags = soup[0].find_all()
@@ -113,43 +117,43 @@ def featureExtraction(soup, driver, root_width, root_height):
             elif FLAG_VALUE is FLAG_IMG: tag_appends['i'] = 'YES'
             elif FLAG_VALUE is FLAG_TABLE: tag_appends['t'] = 'YES'
             elif FLAG_VALUE is FLAG_SUP: tag_appends['sup'] = 'YES'
-            elif FLAG_VALUE is FLAG_A:
-                parent = tag.parent
-                if parent.name == 'sup': tag_appends['sup_child'] = 'YES'
-            elif FLAG_VALUE is FLAG_TABLE_ELEMENT: tag_appends['tab_elem'] = 'YES'
 #            elif FLAG_VALUE is FLAG_DL_DD: tag_appends['dl'] = 'YES'
 #            elif FLAG_VALUE is FLAG_MATH_TYPE: tag_appends['math_type'] = 'YES'
 #            elif FLAG_VALUE is FLAG_MATH_ELEM: tag_appends['math_elem'] = 'YES'
 #            elif FLAG_VALUE is FLAG_ANNOTATION: tag_appends['annot'] = 'YES'
-
+            
             tag_header.append(tag_appends['h'])
             tag_p.append(tag_appends['p'])
             tag_formatting.append(tag_appends['f'])
             tag_img.append(tag_appends['i'])
             tag_table.append(tag_appends['t'])
             tag_sup.append(tag_appends['sup'])
-            tag_sup_child.append(tag_appends['sup_child'])
-            tag_tab_elem.append(tag_appends['tab_elem'])
 #            tag_dl_type.append(tag_appends['dl'])
 #            tag_math_type.append(tag_appends['math_type'])
 #            tag_math_elem.append(tag_appends['math_elem'])
 #            tag_annotation.append(tag_appends['annotation'])
 
             text = tag.text.strip()
+            
+            if FLAG_VALUE is FLAG_HEADER and is_unnecessary_text(text): tag_unnecessary_header.append('YES')
+            else: tag_unnecessary_header.append('NO')
+            
             num_words = len(re.split(regexp, text))
             if len(text) == 0: 
                 word_count.append(0)
                 num_words = 0
             else: word_count.append(num_words)
 
-            class_appends = {'r': 'NO', 's': 'NO'}
+            class_appends = {'r': 'NO', 's': 'NO', 'm': 'NO'}
             if 'class' in tag.attrs:
                 FLAG_CLASS_VALUE = findClassType(tag.attrs['class'])
                 if FLAG_CLASS_VALUE is FLAG_UNNECESSARY_CLASS: class_appends['r'] = 'YES'
                 elif FLAG_CLASS_VALUE is FLAG_SPAN_INTERACTION and tag_appends['s'] is 'YES': class_appends['s'] = 'YES'
+                elif FLAG_CLASS_VALUE is FLAG_MATH_SPAN and tag_appends['s'] is 'YES': class_appends['m'] = 'YES'
 
             is_class_value_relevant.append(class_appends['r'])
             tag_span_interaction.append(class_appends['s'])
+            tag_math_span.append(class_appends['m'])
 
             id_append = {'i': 'NO'}
             if 'id' in tag.attrs:
@@ -158,9 +162,16 @@ def featureExtraction(soup, driver, root_width, root_height):
             
             is_id_value_relevant.append(id_append['i'])
 
-            num_li_ol = len(tag.find_all('li'))
-            if num_words != 0: number_listing_per_word.append(num_li_ol/(num_words))
-            else: number_listing_per_word.append(10)
+            li_tags = tag.find_all('li')
+            num_li_tags = len(li_tags)
+            num_tags = len(tag.findAll())
+            num_li_child_tags = 0
+            for li in li_tags:
+                num_li_child_tags += len(li.findAll())
+            num_li_level_tags = num_tags - num_li_child_tags if num_tags > num_li_child_tags else num_tags
+
+            if num_li_level_tags != 0: number_listing_per_word.append(num_li_tags/(num_li_level_tags))
+            else: number_listing_per_word.append('nan')
 
             num_hyperlinks = len(tag.find_all(lambda tg: tg.name == "a" and len(tg.attrs) > 1 and 'href' in tg.attrs))
             if num_words != 0: number_hyper_per_word.append(num_hyperlinks/(num_words))
@@ -169,9 +180,17 @@ def featureExtraction(soup, driver, root_width, root_height):
             if tag_appends['i'] is 'YES' and 'src' in tag.attrs: attr_src_interation.append('YES')
             else: attr_src_interation.append('NO')
 
-            num_td_tr_th = len(tag.find_all('td')) + len(tag.find_all('tr')) + len(tag.find_all('th'))
-            if num_words != 0: number_td_type_per_word.append(num_td_tr_th/(num_words))
-            else: number_td_type_per_word.append(100)
+            td_tr_th_tags = len(tag.find_all('td')) + len(tag.find_all('tr')) + len(tag.find_all('th'))
+            num_td_tr_th = len(td_tr_th_tags)
+            num_tags = len(tag.findAll())
+            num_td_tr_child_tags = 0
+            for td_tr_child_tag in td_tr_th_tags:
+                num_td_tr_child_tags += len(td_tr_child_tag.findAll())
+            
+            num_td_tr_level_tags = num_tags - num_td_tr_child_tags if num_tags > num_td_tr_child_tags else num_tags
+
+            if num_td_tr_level_tags != 0: number_td_type_per_word.append(num_td_tr_th/(num_td_tr_level_tags))
+            else: number_td_type_per_word.append('nan')
 
             try:
                 x_path_tag = xpath_soup(tag)
@@ -183,10 +202,17 @@ def featureExtraction(soup, driver, root_width, root_height):
                 temp_h = 0 if temp_h is None else temp_h
                 temp_w = 0 if temp_w is None else temp_w
                 diff_height_width.append(temp_h - temp_w)
+                height.append(temp_h)
+                width.append(temp_w)
+                ratio = temp_w/temp_h if temp_h > 0 else 'nan'
+                aspect_ratio.append(ratio)
             except NSEE:
                 relative_x.append(0)
                 relative_y.append(0)
                 diff_height_width.append(0)
+                height.append(0)
+                width.append(0)
+                aspect_ratio.append('nan')
 
             name.append(tag.name)
             attrs.append(list(tag.attrs.values()))
@@ -196,9 +222,9 @@ def clearAll():
     pass
         
 def formCSVData():
-    data = {'tag_header': tag_header, 'tag_para': tag_p, 'tag_formatting': tag_formatting, 'word_count': word_count, 'interacting_span_tag': tag_span_interaction, 'relative_x_coord': relative_x, 'relative_y_coord': relative_y, 'relative_listings': number_listing_per_word, 'relative_hyperlinks': number_hyper_per_word, 'tag_img': tag_img, 'src_img_interaction': attr_src_interation, 'red_flag_class': is_class_value_relevant, 'tag_table': tag_table, 'tag_sup': tag_sup, 'tag_sup_child': tag_sup_child, 'tag_tab_elem': tag_tab_elem, 'red_flag_id': is_id_value_relevant, 'relative_table_elements': number_td_type_per_word, 'height_width_diff': diff_height_width, 'name': name, 'attrs': attrs}
+    data = {'tag_header': tag_header, 'tag_para': tag_p, 'tag_formatting': tag_formatting, 'word_count': word_count, 'interacting_span_tag': tag_span_interaction, 'relative_x_coord': relative_x, 'relative_y_coord': relative_y, 'relative_listings': number_listing_per_word, 'relative_hyperlinks': number_hyper_per_word, 'tag_img': tag_img, 'tag_math_span': tag_math_span, 'src_img_interaction': attr_src_interation, 'red_flag_class': is_class_value_relevant, 'tag_table': tag_table, 'tag_sup': tag_sup, 'tag_unnecessary_header': tag_unnecessary_header, 'red_flag_id': is_id_value_relevant, 'relative_table_elements': number_td_type_per_word, 'height_width_diff': diff_height_width, 'height': height, 'width': width, 'aspect_ratio': aspect_ratio, 'name': name, 'attrs': attrs}
     df = DataFrame(data)
-    writer = ExcelWriter('Second Iteration Data\data_gathered_part_second_segmentation_4.xlsx', engine = 'openpyxl')
+    writer = ExcelWriter('Second Iteration Data\data_gathered_part_second_segmentation_v3_3.xlsx', engine = 'openpyxl')
     df.to_excel(writer, sheet_name = 'Sheet1', header = True)
     writer.save()
 
@@ -221,6 +247,6 @@ def extractFrom(content, URI):
     clearAll()
 
 # f = open('List Of Sites\Wikipedia\site_3.html', 'r', encoding = 'utf8', errors = 'ignore')
-URI = 'https://en.wikipedia.org/wiki/Artificial_intelligence'
+URI = 'https://en.wikipedia.org/wiki/Machine_learning'
 content = request.urlopen(URI)
 extractFrom(content, URI)
