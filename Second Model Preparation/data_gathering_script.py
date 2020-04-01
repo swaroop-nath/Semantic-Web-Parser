@@ -180,7 +180,7 @@ def featureExtraction(soup, driver, root_width, root_height):
             if tag_appends['i'] is 'YES' and 'src' in tag.attrs: attr_src_interation.append('YES')
             else: attr_src_interation.append('NO')
 
-            td_tr_th_tags = len(tag.find_all('td')) + len(tag.find_all('tr')) + len(tag.find_all('th'))
+            td_tr_th_tags = tag.find_all('td')
             num_td_tr_th = len(td_tr_th_tags)
             num_tags = len(tag.findAll())
             num_td_tr_child_tags = 0
@@ -224,7 +224,7 @@ def clearAll():
 def formCSVData():
     data = {'tag_header': tag_header, 'tag_para': tag_p, 'tag_formatting': tag_formatting, 'word_count': word_count, 'interacting_span_tag': tag_span_interaction, 'relative_x_coord': relative_x, 'relative_y_coord': relative_y, 'relative_listings': number_listing_per_word, 'relative_hyperlinks': number_hyper_per_word, 'tag_img': tag_img, 'tag_math_span': tag_math_span, 'src_img_interaction': attr_src_interation, 'red_flag_class': is_class_value_relevant, 'tag_table': tag_table, 'tag_sup': tag_sup, 'tag_unnecessary_header': tag_unnecessary_header, 'red_flag_id': is_id_value_relevant, 'relative_table_elements': number_td_type_per_word, 'height_width_diff': diff_height_width, 'height': height, 'width': width, 'aspect_ratio': aspect_ratio, 'name': name, 'attrs': attrs}
     df = DataFrame(data)
-    writer = ExcelWriter('Second Iteration Data\data_gathered_part_second_segmentation_v3_3.xlsx', engine = 'openpyxl')
+    writer = ExcelWriter('Second Iteration Data\data_gathered_part_second_segmentation_v4_4.xlsx', engine = 'openpyxl')
     df.to_excel(writer, sheet_name = 'Sheet1', header = True)
     writer.save()
 
@@ -247,6 +247,7 @@ def extractFrom(content, URI):
     clearAll()
 
 # f = open('List Of Sites\Wikipedia\site_3.html', 'r', encoding = 'utf8', errors = 'ignore')
-URI = 'https://en.wikipedia.org/wiki/Machine_learning'
+urls = ['https://en.wikipedia.org/wiki/Data_science', 'https://en.wikipedia.org/wiki/Machine_learning', 'https://en.wikipedia.org/wiki/Artificial_intelligence']
+URI = urls[2]
 content = request.urlopen(URI)
 extractFrom(content, URI)
