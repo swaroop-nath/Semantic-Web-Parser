@@ -171,7 +171,7 @@ def featureExtraction(soup, driver, root_width, root_height):
             num_li_level_tags = num_tags - num_li_child_tags if num_tags > num_li_child_tags else num_tags
 
             if num_li_level_tags != 0: number_listing_per_word.append(num_li_tags/(num_li_level_tags))
-            else: number_listing_per_word.append('nan')
+            else: number_listing_per_word.append(0)
 
             num_hyperlinks = len(tag.find_all(lambda tg: tg.name == "a" and len(tg.attrs) > 1 and 'href' in tg.attrs))
             if num_words != 0: number_hyper_per_word.append(num_hyperlinks/(num_words))
@@ -190,7 +190,7 @@ def featureExtraction(soup, driver, root_width, root_height):
             num_td_tr_level_tags = num_tags - num_td_tr_child_tags if num_tags > num_td_tr_child_tags else num_tags
 
             if num_td_tr_level_tags != 0: number_td_type_per_word.append(num_td_tr_th/(num_td_tr_level_tags))
-            else: number_td_type_per_word.append('nan')
+            else: number_td_type_per_word.append(0)
 
             try:
                 x_path_tag = xpath_soup(tag)
@@ -204,7 +204,7 @@ def featureExtraction(soup, driver, root_width, root_height):
                 diff_height_width.append(temp_h - temp_w)
                 height.append(temp_h)
                 width.append(temp_w)
-                ratio = temp_w/temp_h if temp_h > 0 else 'nan'
+                ratio = temp_w/temp_h if temp_h > 0 else 0
                 aspect_ratio.append(ratio)
             except NSEE:
                 relative_x.append(0)
@@ -212,7 +212,7 @@ def featureExtraction(soup, driver, root_width, root_height):
                 diff_height_width.append(0)
                 height.append(0)
                 width.append(0)
-                aspect_ratio.append('nan')
+                aspect_ratio.append(0)
 
             name.append(tag.name)
             attrs.append(list(tag.attrs.values()))

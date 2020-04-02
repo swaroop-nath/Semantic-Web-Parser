@@ -3,8 +3,8 @@ import pickle
 import itertools
 from tree_structure import Node
 import re, os
+import pandas as pd
 from selenium import webdriver
-import numpy as np
 
 MAIN_CONTENT_LABEL = 2
 
@@ -90,20 +90,13 @@ def extract_features(child_soup, root_area, driver):
 
 def get_main_content(root_node):
     children_nodes = root_node.getChildren()
-    model_filename = r'first_phase/first_classifier.pkl'
-    encoder_filename = r'first_phase/first_phase_encoders.pkl'
+    pipeline_file = r'first_phase/first_model.mdl'
     if children_nodes != -1:
-        model = pickle.load(open(model_filename, 'rb'))
-        table_encoder, main_encoder, article_encoder = pickle.load(open(encoder_filename, 'rb'))
+        model = pickle.load(open(pipeline_file, 'rb'))
         for child in children_nodes:
             features = child.features
-            print(features)
-            print()
-            features['tag_table'] = table_encoder.transform([features['tag_table']])[0]
-            features['tag_main'] = main_encoder.transform([features['tag_main']])[0]
-            features['tag_article'] = article_encoder.transform([features['tag_article']])[0]
-            X = np.fromiter(features.values(), float)
-            pred = model.predictValues(X.reshape(1,-1))
+            X = pd.DataFrame(features, index = [0])
+            pred = model.predict(X)
             child.setLabel(pred[0])
         for child in children_nodes:
             if child.label == MAIN_CONTENT_LABEL: return child
