@@ -32,7 +32,7 @@ def fetch_data_from_url(url):
     
     return cleaned_dom_structure
 
-cleaned_soup = fetch_data_from_url('https://en.wikipedia.org/wiki/Isaac_Newton')
+cleaned_soup = fetch_data_from_url('https://en.wikipedia.org/wiki/Machine_learning')
 
-#with open('final_doc.txt', 'w') as file:
-#    file.write(cleaned_soup.text)
+with open('final_doc_3.txt', 'w') as file:
+    file.write(str(cleaned_soup))
