@@ -72,7 +72,7 @@ urls = ['https://en.wikipedia.org/wiki/Data_science', 'https://www.britannica.co
 'https://www.geeksforgeeks.org/skip-list/', 'https://www.geeksforgeeks.org/shortest-path-faster-algorithm/?ref=leftbar-rightbar',
 'https://byjus.com/maths/probability/', 'https://byjus.com/maths/differential-equation/']
 
-for index in range(20, len(urls)):
+for index in range(len(urls)):
     url = urls[index]
     with request.urlopen(url) as content:
         soup = BS(content, 'lxml')
