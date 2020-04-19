@@ -4,11 +4,6 @@ from urllib import request as request
 import pandas as pd
 import numpy as np
 import re
-import os
-from pathlib import Path
-import itertools
-from selenium import webdriver
-from selenium.common.exceptions import NoSuchElementException as NSEE
 
 tags = ['p', 'b', 'i', 'em', 'strong', 'sup', 'sub', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6']
 regexp = '; |, | |\n|-\*'
@@ -53,9 +48,6 @@ def extract_features(soup, total_formatting_tags, total_tags_in_dom, total_words
 
         data_frame = data_frame.append(features, ignore_index=True)
             
-
-    # data_dir = Path('/Data/')
-    # with open(r'/Data/dataset_' + str(index) + '.csv', 'w+') as file:
     data_frame.to_csv(r'Data/dataset_' + str(index) + '.csv', index=False)
 
 
